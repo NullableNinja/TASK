@@ -1,0 +1,155 @@
+<!doctype html>
+<!--
+  =============================================
+  students.html  (FULL PAGE • SHARED HEADER/FOOTER • EXTERNAL CSS)
+  ---------------------------------------------
+  PURPOSE
+  - Resources for new/current students:
+    * New Student Form (PDF)
+    * Testing requirement PDFs by belt
+    * Quick FAQ
+    * Address band with call CTA
+
+  HOW THIS PAGE IS WIRED
+  - Uses the SAME header/footer as the homepage.
+    * <div id="site-header"></div> and <div id="site-footer"></div>
+    * /assets/js/partials.js injects header.html + footer.html
+    * /assets/css/header.css and /assets/css/footer.css handle styling
+  - Uses global site styles: /assets/css/main.css
+  - Page-specific styles live in: /assets/css/students.css  ← edit here
+
+  WHAT YOU CAN EDIT QUICKLY
+  - PDFs linked in the “New Student Form” and “Belts” sections.
+  - FAQ entries.
+  - Address line & phone CTA.
+
+  NOTES
+  - We use the “soft” stack look (stack-soft + layered-off) so this page
+    stays clean and readable.
+  =============================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Task Karate – Students</title>
+  <meta name="description" content="Downloads for new students and belt testing requirements at Task Karate School in La Crosse, WI."/>
+  <link rel="icon" href="TASK-NEW-LOGO.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="assets/css/header.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/footer.css"/>
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="assets/css/students.css"/>
+</head>
+<body>
+  <!-- Decorative background (shared look) -->
+  <div class="bg-geo" aria-hidden="true"></div>
+
+  <!-- Header is injected here by /assets/js/partials.js -->
+  <div id="site-header"></div>
+
+  <!-- =======================
+       MAIN CONTENT
+       ======================= -->
+  <main class="container">
+    <!-- Page intro -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Resources</span>
+        <h1>Students</h1>
+        <p class="muted">Quick downloads for testing requirements and a new student form. If you’re unsure where to start, ask—we’re happy to help.</p>
+      </div>
+    </section>
+
+    <!-- New Student Form -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <div class="row-split">
+          <div>
+            <h2 class="h2-tight">New Student Form</h2>
+            <p class="muted">Print and bring to your first class, or email it ahead.</p>
+          </div>
+          <!-- CHANGE ME: put your real PDF in /files/ -->
+          <a class="btn navy square" href="files/forms/task-form-new-student.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Belt testing downloads (color buttons) -->
+    <section id="belts" class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Testing Requirements</span>
+        <h2>Belts</h2>
+        <!-- HOW-TO: Put PDFs in /files/ using the names in each href. -->
+        <div class="belt-grid">
+          <a class="btn square belt-btn belt-white"  href="files/testing/task-testing-white.pdf"  download>White Belt</a>
+          <a class="btn square belt-btn belt-gold"   href="files/testing/task-testing-gold.pdf"   download>Gold Belt</a>
+          <a class="btn square belt-btn belt-orange" href="files/testing/task-testing-orange.pdf" download>Orange Belt</a>
+          <a class="btn square belt-btn belt-green"  href="files/testing/task-testing-green.pdf"  download>Green Belt</a>
+          <a class="btn square belt-btn belt-purple" href="files/testing/task-testing-purple.pdf" download>Purple Belt</a>
+          <a class="btn square belt-btn belt-blue"   href="files/testing/task-testing-blue.pdf"   download>Blue Belt</a>
+          <a class="btn square belt-btn belt-red"    href="files/testing/task-testing-red.pdf"    download>Red Belt</a>
+          <a class="btn square belt-btn belt-brown"  href="files/testing/task-testing-brown.pdf"  download>Brown Belt</a>
+          <a class="btn square belt-btn belt-black"  href="files/testing/task-testing-black.pdf"  download>Black Belt</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">FAQ</span>
+        <h2>Quick answers</h2>
+        <div class="faq">
+          <details class="q" open>
+            <summary>What age are the classes?</summary>
+            <div>Kids class is typically ages 6–11, and the Teen/Adult class is 12+. Truly—you're never too old to start.</div>
+          </details>
+          <details class="q">
+            <summary>How often should I attend classes?</summary>
+            <div>Plan on at least 2–3 times per week for steady progress.</div>
+          </details>
+          <details class="q">
+            <summary>Do kids use karate in the wrong way?</summary>
+            <div>We emphasize respect, self-control, and never abusing martial arts skills.</div>
+          </details>
+          <details class="q">
+            <summary>How long to achieve Black Belt?</summary>
+            <div>Minimum is about 3½ years, and it often takes longer—consistent training is key.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Address band -->
+    <div class="address-band">
+      <div class="addr-left">
+        <!-- Bullet-proof icon: CSS forces stroke-only so it can’t turn into a giant black blob -->
+        <svg class="addr-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0Z"/>
+          <path d="M12 7v5l3 3"/>
+        </svg>
+        <div>
+          <strong style="color:var(--card-ink)">Task Karate School</strong><br/>
+          <span class="muted">1501 St. Andrew Street, Suite 212 • La Crosse, WI 54603</span>
+        </div>
+      </div>
+      <div>
+        <a class="btn navy square small" href="tel:+16087818275">(608) 781-TASK (8275)</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer is injected here by /assets/js/partials.js -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts (order matters) -->
+  <script src="assets/js/partials.js"></script>
+  <script>mountPartials();</script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
