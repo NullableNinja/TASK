@@ -1,0 +1,76 @@
+/* ==============================
+   FOOTER LAYOUT (compact)
+   ============================== */
+footer {
+  background: #0f1a25; /* match site theme */
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 24px;              /* tightened padding */
+  font-size: 0.9rem;
+  color: #cdd6df;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;                 /* stack on mobile */
+  gap: 12px;
+}
+
+.footer-row div {
+  opacity: 0.85;                   /* copyright text */
+  font-size: 0.85rem;
+}
+
+/* ==============================
+   FOOTER SOCIAL ICONS
+   ============================== */
+.socials {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.socials li {
+  display: inline-block;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;       /* compact button size */
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.socials a:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+/* force SVGs to fit inside their buttons */
+.socials .soc {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  color: #fff;
+}
+
+/* ==============================
+   SCROLL INDICATOR
+   ============================== */
+#scroll-indicator {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  width: 0%;
+  background: #fff;  /* overwritten by JS belt colors */
+  z-index: 9999;
+  transition: width 0.1s linear, background 0.3s ease;
+}

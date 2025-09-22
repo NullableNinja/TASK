@@ -1,0 +1,412 @@
+/* ===========================
+   1. DESIGN TOKENS
+   =========================== */
+:root {
+  --ink: #0E2430;
+  --muted: #557086;
+
+  --task-400: #1F5EA1;  /* Primary TASK blue */
+  --task-500: #173E68;  /* Darker TASK blue */
+
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-1: 0 4px 12px rgba(0,0,0,0.15);
+  --shadow-2: 0 8px 18px rgba(0,0,0,0.25);
+  --shadow-3: 0 12px 28px rgba(0,0,0,0.35);
+  
+    /* Surfaces */
+  --surface: #f9fafb;
+  --surface-variant: #eceff1;
+  --surface-elevated: #ffffff;
+
+  /* Elevation (Material-like shadows) */
+  --elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --elevation-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --elevation-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  --elevation-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  --elevation-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+/* ===========================
+   2. RESET & BASELINE
+   =========================== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font: 16px/1.6 "Inter", system-ui, sans-serif;
+  background: #0e1a23;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+h1, h2, h3 {
+  font-family: "Bebas Neue", sans-serif;
+  margin: 0 0 12px;
+}
+.muted { color: var(--muted); }
+
+
+/* ===========================
+   2B. HEADINGS (HI-YAH! STYLE)
+   =========================== */
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Punchy underline highlight */
+.hi-yah {
+  position: relative;
+  display: inline-block;
+}
+.hi-yah::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.1em;
+  width: 100%;
+  height: 0.25em;
+  background: var(--task-400);
+  z-index: -1;
+  transform: skew(-12deg);
+}
+
+
+
+/* ===========================
+   3. GLOBAL CONTAINER
+   =========================== */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===========================
+   4. GLOBAL CARD SYSTEM (double-layer WOW, fixed padding)
+   =========================== */
+.card {
+  background: linear-gradient(180deg,#f0f2f5 0%, #e2e6ea 100%);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px 26px;   /* slightly larger padding to offset new depth */
+  position: relative;
+  box-shadow: var(--shadow-2), inset 0 1px 3px rgba(255,255,255,0.5);
+  border: 1px solid #c7ced6;
+  z-index: 1;
+  color: var(--ink);
+}
+
+/* Double-layer offset panel behind card */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 12px; left: 12px; right: -12px; bottom: -12px;
+  background: #d0d4da;
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  box-shadow: var(--shadow-3);
+  border: 1px solid #b0b8c0;
+}
+
+/* ===========================
+   4B. SECTION SPACING
+   Add vertical breathing room between sections
+   =========================== */
+.card,
+.coupon,
+.panel,
+.p-card {
+  margin-bottom: 48px;  /* consistent space between sections */
+}
+
+/* Larger gaps for stack-soft utility */
+.stack-soft {
+  margin: 64px 0;       /* extra dramatic separation */
+}
+
+
+
+
+/* ===========================
+   5. EYEBROW LABEL (badge style, upgraded)
+   =========================== */
+.eyebrow {
+  display: inline-block;
+  background: linear-gradient(90deg, #1F5EA1, #173E68);
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  animation: eyebrowFade 0.6s ease-out forwards;
+}
+
+@keyframes eyebrowFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+/* ===========================
+   6. BUTTONS (Material Expressive style)
+   =========================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 999px; /* full pill */
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: var(--task-400);
+  color: #fff;
+  transition: background 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+}
+
+/* Hover + Active */
+.btn:hover {
+  background: var(--task-500);
+  box-shadow: var(--elevation-2);
+}
+.btn:active {
+  transform: scale(0.97);
+  box-shadow: var(--elevation-1);
+}
+.btn:focus-visible {
+  outline: 3px solid rgba(31,94,161,0.35);
+  outline-offset: 2px;
+}
+
+/* Color Variants */
+.btn.navy {
+  background: var(--task-500);
+}
+.btn.steel {
+  background: #5E7488;
+}
+.btn.warning {
+  background: #DA6B63;
+}
+
+
+
+
+/* ===========================
+   7. COUPON STYLE
+   =========================== */
+.coupon {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-2);
+}
+.coupon-body { flex: 1; padding: 16px; }
+.coupon-head {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.seal {
+  font-weight: 900;
+  font-size: 18px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 50%;
+  background: var(--task-400);
+  color: #fff;
+  line-height: 1.2;
+}
+.coupon-cta {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.stub {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #666;
+}
+
+/* ===========================
+   8. CAROUSEL NAV BUTTONS
+   =========================== */
+.carousel .nav button {
+  background: var(--task-400);
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===========================
+   9. CTA GRID
+   =========================== */
+.cta-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+.cta-key { font-weight: 700; color: var(--task-400); }
+.cta-val { font-weight: 600; }
+
+/* ===========================
+   10. BACKGROUND (old style)
+   =========================== */
+.bg-geo {
+  position: fixed;
+  inset: -10vmax;
+  z-index: -1;
+  pointer-events: none;
+}
+.bg-geo::before,
+.bg-geo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.bg-geo::before {
+  background:
+    linear-gradient(120deg, transparent 0 30%, rgba(36,77,120,.18) 30% 60%, transparent 60%),
+    linear-gradient(-35deg, transparent 0 45%, rgba(20,54,88,.22) 45% 72%, transparent 72%),
+    radial-gradient(1200px 700px at 20% 15%, rgba(34,72,112,.20), transparent 60%),
+    radial-gradient(1000px 600px at 85% 90%, rgba(8,26,41,.35), transparent 65%);
+  filter: saturate(.9);
+}
+.bg-geo::after {
+  background:
+    linear-gradient(200deg, transparent 0 40%, rgba(16,45,80,.18) 40% 66%, transparent 66%),
+    linear-gradient(30deg, transparent 0 50%, rgba(8,32,52,.18) 50% 78%, transparent 78%),
+    radial-gradient(1400px 800px at 50% -10%, rgba(10,36,60,.35), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: .35;
+  transform: translateY(6vh);
+}
+
+/* ===========================
+   RETURN TO TOP BUTTON (Styled)
+   =========================== */
+#toTopBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  background: var(--task-500, #173E68); /* navy blue */
+  color: #fff;
+  border: none;
+  border-radius: 16px; /* rounded square */
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Arrow icon */
+#toTopBtn svg {
+  width: 22px;
+  height: 22px;
+  stroke: #fff;
+}
+
+/* Add "layered circle" effect */
+#toTopBtn::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  background: var(--task-400, #1F5EA1); /* lighter blue accent */
+  border-radius: 50%;
+  box-shadow: var(--shadow-2);
+  z-index: -1;
+}
+
+/* Show state */
+#toTopBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+
+/* ===========================
+   SCROLL INDICATOR (BELT BAR)
+   =========================== */
+#scroll-indicator {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 8px;
+  width: 0%;
+  background: white; /* starts white */
+  z-index: 9999;
+  transition: width 0.25s ease, background 0.5s ease;
+  pointer-events: none; /* not clickable */
+}
+
+/* Optional rounded end */
+#scroll-indicator::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  border-radius: 0 4px 4px 0;
+  background: inherit;
+}

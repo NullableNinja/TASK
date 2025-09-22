@@ -1,0 +1,149 @@
+/* ===========================
+   NAVIGATION BAR (Styling)
+   ---------------------------
+   - Applies to <nav class="navbar"> from navigation-bar.html
+   - Provides sticky header with glass effect
+   - Uses flexbox for layout
+   =========================== */
+
+.navbar {
+  /* Keep nav bar visible at top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  /* Flexbox layout for logo + links */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Spacing inside bar */
+  padding: 8px 20px;
+
+  /* Ensure it stays above page content */
+  z-index: 1000;
+
+  /* Glass-like background effect */
+  background: rgba(24, 27, 25, 0.55); /* semi-transparent dark */
+  backdrop-filter: blur(12px) saturate(120%);
+
+  /* Decorative border line under nav bar */
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, #fff, #1f5ea1, #fff) 1;
+
+  /* Drop shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ===========================
+   BRAND / LOGO
+   =========================== */
+.navbar .nav-brand {
+  position: relative;   /* reference for absolute positioning */
+}
+
+.navbar .nav-brand img.logo {
+  height: 80px;        /* nice big sticker */
+  width: auto;
+  display: block;
+
+  position: absolute;  /* float on top of navbar */
+  top: -35px;          /* scoot up so it overlaps */
+  left: 0;             /* stick to the left edge */
+  z-index: 1100;       /* make sure it sits above navbar background */
+  pointer-events: none; /* so clicks go "through" the sticker */
+}
+
+
+/* ===========================
+   NAV LINKS (UL container)
+   =========================== */
+.navbar .nav-links {
+  display: flex;         /* horizontal row */
+  gap: 12px;             /* spacing between links */
+  list-style: none;      /* remove bullets */
+  margin: 0;             /* reset default list margin */
+  padding: 0;            /* reset default list padding */
+}
+
+/* ===========================
+   NAV LINKS (individual <a>)
+   =========================== */
+.navbar .nav-links a {
+  display: inline-block;
+  padding: 6px 12px;
+
+  /* Rounded button-like style */
+  border-radius: 10px;
+
+  /* Typography */
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+
+  /* Subtle glassy background */
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  /* Smooth animation on hover */
+  transition: background 0.25s, transform 0.15s;
+}
+
+/* ===========================
+   NAV LINKS (hover effect)
+   =========================== */
+.navbar .nav-links a:hover {
+  background: rgba(31, 94, 161, 0.4); /* TASK blue highlight */
+  transform: scale(1.05);             /* slight zoom */
+}
+
+
+/* ===========================
+   DROPDOWN MENU
+   =========================== */
+.navbar .dropdown {
+  position: relative;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;           /* place directly under parent */
+  left: 0;
+  background: rgba(24, 27, 25, 0.9); /* darker glass panel */
+  backdrop-filter: blur(10px) saturate(120%);
+  border-radius: 10px;
+  margin: 6px 0 0;
+  padding: 6px 0;
+  list-style: none;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  min-width: 180px;
+  z-index: 1001;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.navbar .dropdown-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .dropdown-menu a {
+  display: block;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  transition: background 0.25s;
+}
+
+.navbar .dropdown-menu a:hover {
+  background: rgba(31,94,161,0.6); /* TASK blue highlight */
+  transform: none; /* disable top-level scale */
+}

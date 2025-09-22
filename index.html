@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- ===========================
+       META & BASIC CONFIG
+       =========================== -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Title & SEO -->
+  <title>Task Karate School – La Crosse, WI</title>
+  <meta name="description"
+        content="Karate for kids, teens, and adults in the La Crosse area. Build confidence, learn practical self-defense, and have a blast at Task Karate School."/>
+
+  <!-- Favicon (logo in browser tab) -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+
+  <!-- ===========================
+       FONTS
+       - Using Google Fonts: Bebas Neue + Inter
+       =========================== -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+  <!-- ===========================
+       CSS STYLESHEETS
+       - Base = global styles (tokens, reset, typography)
+       - Index = homepage-specific styling
+       - Navigation-bar = styles for header partial
+       =========================== -->
+  <link rel="stylesheet" href="assets/styles/base.css">
+  <link rel="stylesheet" href="assets/styles/index.css">
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css">
+  <link rel="stylesheet" href="assets/styles/partials/footer.css">
+</head>
+
+<body>
+  <!-- ===========================
+       DECORATIVE BACKGROUND
+       (kept separate for layering effect)
+       =========================== -->
+  <div class="bg-geo" aria-hidden="true"></div>
+
+  <!-- ===========================
+       HEADER / NAVIGATION
+       Injected from partial (navigation-bar.html)
+       =========================== -->
+  <div id="site-header"></div>
+
+  <!-- ===========================
+       MAIN CONTENT AREA
+       =========================== -->
+  <main class="container">
+
+    <!-- COVER / HERO SECTION -->
+    <section id="cover">
+      <div class="cover">
+        <!-- Main hero image -->
+        <img src="images/hero/Cover_Image.jpg"
+             alt="Smiling students training on the mats at Task Karate"
+             loading="eager" decoding="async"/>
+        <!-- Overlay text on top of image -->
+        <div class="brand-title">Task Karate School • La Crosse</div>
+      </div>
+    </section>
+
+    <div class="spacer-xs"></div>
+
+    <!-- HOME INTRO SECTION -->
+    <section id="home" class="stack-soft">
+      <div class="card layered-soft">
+        <span class="eyebrow">La Crosse • Friendly • Practical</span>
+          <h1>One Dojo. One Teacher. A Lifetime of Martial Arts.</h1>
+          <p>
+            At Task Karate School, you don’t get lost in the crowd — you train directly with 
+            <strong>Mr. Randy Thomson</strong>, a martial artist with over 30 years of experience. 
+            With help from dedicated assistants, he personally guides every class in karate, sparring, 
+            weapons, and Eskrima. Kids, teens, and adults alike build confidence, discipline, 
+            and real-world skills in a positive, family-style dojo.
+          </p>
+
+
+        <!-- Call-to-action buttons -->
+        <div class="cta-row">
+          <a class="btn navy" href="#programs">Explore Programs</a>
+          <a class="btn" href="#trial">Start Free Trial</a>
+          <a class="btn steel" href="#carousel">See the Vibes</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PROGRAMS SECTION -->
+    <section id="programs" class="stack-soft">
+      <div class="card layered-soft">
+        <span class="eyebrow">Programs</span>
+        <h2>Something for every age and energy level</h2>
+    
+        <!-- Two-column layout -->
+        <div class="programs-layout">
+    
+          <!-- LEFT: Program list -->
+          <div class="program-list">
+            <button class="program-btn active" data-program="kids">Kids Karate</button>
+            <button class="program-btn" data-program="teens">Teens &amp; Adults</button>
+            <button class="program-btn" data-program="eskrima">IS3 • Eskrima</button>
+			<button class="program-btn" data-program="weapons">Weapons</button>
+          </div>
+    
+          <!-- RIGHT: Program detail panel -->
+          <div class="program-detail">
+            <h3 id="programTitle">Kids Karate</h3>
+            <p id="programDesc">
+              Ages 5–12. Focus, respect, and listening skills wrapped in high-energy classes.
+              Earn stripes and belts the old-school way: by showing grit and good attitude.
+            </p>
+            <img id="programImg" src="images/programs/kids-karate.jpg"
+                 alt="Kids Karate class group photo"/>
+          </div>
+    
+        </div>
+      </div>
+    </section>
+
+    
+    
+
+	<!-- PHOTOS / STACKED ROTATOR -->
+	<section id="photos" class="stack-soft">
+	<div class="card layered-soft">
+		<span class="eyebrow">Photos</span>
+		<h2>Life on the Mats</h2>
+		<p class="muted">
+		Smiles, sweat, high-fives, and bowing in—peek at a typical week at Task Karate.
+		</p>
+	</div>
+	
+	<div class="photo-stacks">
+		<div id="stack1" class="photo-stack tall"></div>
+		<div id="stack2" class="photo-stack medium"></div>
+		<div id="stack3" class="photo-stack short"></div>
+	</div>
+	</section>
+
+
+
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Contact</span>
+        <h3>Say hello (we’re nice)</h3>
+		<p class="muted">
+		Got questions about classes, belts, or whether a black gi really makes you invisible at night? 
+		<em>(Spoiler: kinda.)</em> Shoot us an email or give us a ring—we’re fast, friendly, and only 
+		shout “HI-YAH!” at the right times.
+		</p>
+
+    
+        <div class="contact-tiles">
+          <!-- Email -->
+          <a class="contact-tile email" href="mailto:taskkarate@gmail.com" aria-label="Send an email to Task Karate">
+            <div class="tile-icon">✉️</div>
+            <div class="tile-text">
+              <div class="tile-title">Drop us a line</div>
+              <div class="tile-sub">taskkarate@gmail.com</div>
+            </div>
+          </a>
+    
+          <!-- Phone -->
+          <a class="contact-tile phone" href="tel:+16087818275" aria-label="Call Task Karate now">
+            <div class="tile-icon">📞</div>
+            <div class="tile-text">
+              <div class="tile-title">Give us a ring</div>
+              <div class="tile-sub">1-608-781-TASK (8275)</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+	<!-- MAP SECTION -->
+	<section id="map" class="stack-soft">
+	<div class="card layered-off">
+		<span class="eyebrow">Visit</span>
+		<h2>Find us in La Crosse</h2>
+		<p class="muted">1501 Saint Andrew Street, La Crosse, WI 54603</p>
+	
+		<!-- Decorative pin -->
+		<img src="images/icons/pin.png" alt="Map pin" class="map-pin"/>
+	
+		<!-- Embedded OpenStreetMap -->
+		<div class="cover">
+		<iframe title="Task Karate Map" width="100%" height="380"
+				frameborder="0" scrolling="no"
+				loading="lazy"
+				src="https://www.openstreetmap.org/export/embed.html?bbox=-91.283%2C43.83%2C-91.20%2C43.89&layer=mapnik&marker=43.856%2C-91.230">
+		</iframe>
+		</div>
+	</div>
+	</section>
+
+
+
+	<!-- CONTACT WIDGET (floating button + panel) -->
+	<div class="fab">
+	<button id="openPanel" class="btn navy square"
+			aria-haspopup="dialog" aria-controls="panel">
+		<span>Contact</span>
+	</button>
+	</div>
+	
+	<div class="panel" id="panel" role="dialog" aria-modal="true"
+		aria-label="Quick message panel">
+	<h3>Quick Message</h3>
+	<form id="contactForm">
+		<label for="name">Name</label>
+		<input id="name" required placeholder="Your name"/>
+	
+		<label for="email">Email</label>
+		<input id="email" type="email" required placeholder="you@example.com"/>
+	
+		<label for="msg">Message</label>
+		<textarea id="msg" required placeholder="How can we help?"></textarea>
+	
+		<button class="send" type="submit">HI-YAH!</button>
+		<div class="note">We reply within 1–2 business days.</div>
+	</form>
+	</div>
+
+
+  <!-- Return to Top Button -->
+	<button id="toTopBtn" aria-label="Return to top">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+		<polyline points="18 15 12 9 6 15"></polyline>
+	</svg>
+	</button>
+
+	
+
+    <!-- TRIAL POPOVER -->
+    <aside id="trialPop" class="popover" role="dialog" aria-live="polite">
+      <button class="close" aria-label="Close">×</button>
+      <div class="title">Two-Week Free Trial</div>
+      <p class="muted">No cost, no obligation. Call or email and say “two-week trial.”</p>
+      <div class="cta-row">
+        <a class="btn small navy square" href="tel:+16087818275">Call</a>
+        <a class="btn small square" href="mailto:taskkarate@gmail.com">Email</a>
+      </div>
+    </aside>
+
+
+  </main> <!-- END main.container -->
+
+  <!-- ===========================
+       FOOTER (injected via partial)
+       =========================== -->
+  <div id="site-footer"></div>
+  
+  <!-- SCROLL INDICATOR BAR -->
+  <div id="scroll-indicator"></div>
+
+
+  <!-- ===========================
+       JAVASCRIPT FILES
+       - base.js = global helpers
+       - index.js = homepage scripts
+       - navigation-bar.js = header logic
+       =========================== -->
+  <script src="assets/scripts/partials.js"></script>
+
+  <script src="assets/scripts/base.js"></script>
+  <script src="assets/scripts/index.js"></script>
+  <script src="assets/scripts/partials/navigation-bar.js"></script>
+</body>
+</html>
