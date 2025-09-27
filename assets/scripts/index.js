@@ -125,71 +125,87 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===========================
-     6. PHOTO STACK ROTATOR
-     ---------------------------
-     - Autoload spotlight images
-     - Split into 3 stacks
-     - Rotate with fade
-     =========================== */
-  const maxPhotos = 99;
-  const stacks = [
-    document.getElementById("stack1"),
-    document.getElementById("stack2"),
-    document.getElementById("stack3")
-  ];
-  const photos = [];
+/* ===========================
+   6. PHOTO STACK ROTATOR
+   ---------------------------
+   - Autoload spotlight images
+   - Split into 3 stacks
+   - Rotate with fade & tilt
+   =========================== */
+const maxPhotos = 99;
+const stacks = [
+  document.getElementById("stack1"),
+  document.getElementById("stack2"),
+  document.getElementById("stack3")
+];
+const photos = [];
 
-  // Try loading sequentially until one fails
-  let index = 1;
-  function tryLoadNext() {
-    if (index > maxPhotos) return startRotation();
+// Try loading sequentially until one fails
+let index = 1;
+function tryLoadNext() {
+  if (index > maxPhotos) return startRotation();
 
-    const num = String(index).padStart(2, "0"); // 01, 02...
-    const src = `images/spotlight/${num}.jpg`;
-    const img = new Image();
+  const num = String(index).padStart(2, "0"); // 01, 02...
+  const src = `images/spotlight/${num}.jpg`;
+  const img = new Image();
 
-    img.onload = () => {
-      photos.push(src);
-      index++;
-      tryLoadNext();
-    };
+  img.onload = () => {
+    photos.push(src);
+    index++;
+    tryLoadNext();
+  };
 
-    img.onerror = () => {
-      // Stop at first failure
-      startRotation();
-    };
+  img.onerror = () => {
+    // Stop at first failure
+    startRotation();
+  };
 
+  img.src = src;
+}
+
+// Distribute photos into stacks & set up rotation
+function startRotation() {
+  if (photos.length === 0) return;
+
+  photos.forEach((src, i) => {
+    const stack = stacks[i % stacks.length];
+    const img = document.createElement("img");
     img.src = src;
-  }
 
-  // Randomly distribute photos into stacks
-  function startRotation() {
-    if (photos.length === 0) return;
+    // First photo per stack starts visible
+    if (stack.children.length === 0) {
+      img.classList.add("active");
+    }
 
-    photos.forEach((src, i) => {
-      const stack = stacks[i % stacks.length];
-      const img = document.createElement("img");
-      img.src = src;
-      if (i % stacks.length === 0) img.classList.add("active"); // first in each stack
-      stack.appendChild(img);
-    });
+    // Random tilt on load
+    const angle = (Math.random() * 20 - 10).toFixed(2); // -10 to +10 degrees
+    img.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
 
-    // Rotate every few seconds
-    stacks.forEach((stack) => {
-      let current = 0;
-      const images = stack.querySelectorAll("img");
-      if (images.length <= 1) return;
+    stack.appendChild(img);
+  });
 
-      setInterval(() => {
-        images[current].classList.remove("active");
-        current = (current + 1) % images.length;
-        images[current].classList.add("active");
-      }, 4000 + Math.random() * 2000); // stagger timing
-    });
-  }
+  // Rotate each stack independently
+  stacks.forEach((stack) => {
+    let current = 0;
+    const images = stack.querySelectorAll("img");
+    if (images.length <= 1) return;
 
-  tryLoadNext();
+    setInterval(() => {
+      images[current].classList.remove("active");
+
+      current = (current + 1) % images.length;
+
+      // Random tilt on each new photo
+      const angle = (Math.random() * 20 - 10).toFixed(2);
+      images[current].style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+      images[current].classList.add("active");
+    }, 4000 + Math.random() * 2000); // stagger timing
+  });
+}
+
+tryLoadNext();
+
 
 
 }); // <-- closes DOMContentLoaded

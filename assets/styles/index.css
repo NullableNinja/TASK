@@ -536,32 +536,39 @@
   flex-wrap: wrap;
 }
 
+/* Each stack container */
 .photo-stack {
   position: relative;
-  width: 280px;
+  width: 260px;
+  height: 300px;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-2);
+  perspective: 1000px;
 }
 
-/* Different heights for variety */
-.photo-stack.tall { height: 320px; }
-.photo-stack.medium { height: 260px; }
-.photo-stack.short { height: 200px; }
+/* Make each stack look like it’s casually scattered */
+#stack1 { transform: rotate(-4deg) translateY(10px); }
+#stack2 { transform: rotate(3deg) translateY(-10px); }
+#stack3 { transform: rotate(-2deg) translateY(20px); }
 
 .photo-stack img {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 50%;
+  left: 50%;
+  width: auto;
   height: 100%;
+  max-width: 120%; /* allow overhang */
   object-fit: cover;
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+
   opacity: 0;
-  transition: opacity 1s ease;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
+/* Visible photo */
 .photo-stack img.active {
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
 }
 
