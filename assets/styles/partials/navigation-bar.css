@@ -147,3 +147,48 @@
   background: rgba(31,94,161,0.6); /* TASK blue highlight */
   transform: none; /* disable top-level scale */
 }
+
+
+/* ===========================
+   MOBILE NAVIGATION
+   =========================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 8px 14px;
+  }
+
+  /* Hide the horizontal nav */
+  .navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(24, 27, 25, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px;
+    border-radius: 0 0 14px 14px;
+  }
+
+  /* Show when toggled */
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  /* Hamburger button */
+  .navbar .hamburger {
+    display: block;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #fff;
+    z-index: 1100;
+  }
+}
+
+/* Default: hide hamburger on desktop */
+.navbar .hamburger {
+  display: none;
+}

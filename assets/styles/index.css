@@ -607,3 +607,158 @@
   right: -20px;
   transform: translateY(-50%) rotate(-90deg);
 }
+
+/* ===========================
+   HOME INTRO (Mobile Tweaks)
+   =========================== */
+@media (max-width: 768px) {
+  #home .card {
+    padding: 20px 16px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  }
+
+  #home h1 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin: 8px 0 12px;
+  }
+
+  #home p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #home .eyebrow {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    margin-bottom: 6px;
+  }
+
+  #home .cta-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  #home .cta-row .btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+}
+
+/* ===========================
+   PROGRAMS (Mobile Tweaks)
+   =========================== */
+@media (max-width: 768px) {
+  #programs .programs-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #programs .program-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #programs .program-btn {
+    flex: 1 1 calc(50% - 10px); /* two per row */
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  #programs .program-detail {
+    padding: 16px;
+    min-height: auto; /* allow height to shrink naturally */
+  }
+
+  #programs .program-detail h3 {
+    font-size: 1.2rem;
+  }
+
+  #programs .program-detail p {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* ===========================
+   PHOTOS (Mobile Tweaks)
+   =========================== */
+@media (max-width: 768px) {
+  #photos .photo-stacks {
+    justify-content: center;
+  }
+
+  #photos .photo-stack {
+    display: none; /* hide all by default */
+  }
+
+  #photos .photo-stack:first-child {
+    display: block; /* keep only the first one */
+    width: 100%;    /* stretch nicely */
+    max-width: 340px;
+    height: auto;
+  }
+}
+
+
+/* ===========================
+   CONTACT PANEL (Mobile Cleanup)
+   =========================== */
+@media (max-width: 768px) {
+  .panel {
+    width: 90%;
+    right: 5%;
+    left: 5%;
+    bottom: auto;
+    top: 20%;
+    border-radius: 14px;
+    padding: 16px;
+    background: #fff; /* clean white */
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  }
+
+  .panel h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .panel label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 8px 0 4px;
+  }
+
+  .panel input,
+  .panel textarea {
+    border-radius: 8px;
+    border: 1px solid #d0d4da;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .panel textarea {
+    min-height: 80px;
+  }
+
+  .panel .send {
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 0.95rem;
+    background: var(--task-400);
+    box-shadow: none;
+  }
+
+  .panel .note {
+    font-size: 0.75rem;
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+}

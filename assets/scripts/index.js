@@ -51,19 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
       panel.classList.toggle("show");
     });
   }
+  
+  
+/* ===========================
+   4. TRIAL POPOVER
+   =========================== */
+const trialPop = document.getElementById("trialPop");
+const closeBtn = trialPop?.querySelector(".close");
 
-  /* ===========================
-     4. TRIAL POPOVER
-     =========================== */
-  const trialPop = document.getElementById("trialPop");
-  const closeBtn = trialPop?.querySelector(".close");
+// Only show popover on desktop/tablet (not mobile)
+function isMobile() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
 
-  if (trialPop && closeBtn) {
-    setTimeout(() => { trialPop.style.display = "block"; }, 5000);
-    closeBtn.addEventListener("click", () => {
-      trialPop.style.display = "none";
-    });
-  }
+if (trialPop && closeBtn && !isMobile()) {
+  setTimeout(() => { trialPop.style.display = "block"; }, 5000);
+  closeBtn.addEventListener("click", () => {
+    trialPop.style.display = "none";
+  });
+}
+
 
   /* ===========================
      5. PROGRAM SWITCHER
@@ -222,6 +229,20 @@ function startRotation() {
 }
 
 tryLoadNext();
+
+
+/* ===========================
+   7. MOBILE NAV TOGGLE
+   =========================== */
+const hamburger = document.querySelector('.navbar .hamburger');
+const navLinks = document.querySelector('.navbar .nav-links');
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
+
 
 
 
