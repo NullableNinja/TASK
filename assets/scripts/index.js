@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
    - Autoload spotlight images
    - Split into 3 stacks
    - Rotate with fade & tilt
+   - Loops even if #photos < #stacks
    =========================== */
 const maxPhotos = 99;
 const stacks = [
@@ -163,48 +164,50 @@ function tryLoadNext() {
   img.src = src;
 }
 
-// Distribute photos into stacks & set up rotation
 function startRotation() {
   if (photos.length === 0) return;
 
-  photos.forEach((src, i) => {
-    const stack = stacks[i % stacks.length];
+  // Seed each stack with its first photo
+  stacks.forEach((stack, i) => {
     const img = document.createElement("img");
-    img.src = src;
-
-    // First photo per stack starts visible
-    if (stack.children.length === 0) {
-      img.classList.add("active");
-    }
-
-    // Random tilt on load
-    const angle = (Math.random() * 20 - 10).toFixed(2); // -10 to +10 degrees
-    img.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-
+    img.src = photos[i % photos.length];
+    img.classList.add("active");
+    img.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
     stack.appendChild(img);
   });
 
   // Rotate each stack independently
-  stacks.forEach((stack) => {
-    let current = 0;
-    const images = stack.querySelectorAll("img");
-    if (images.length <= 1) return;
-
+  stacks.forEach((stack, s) => {
+    let currentIndex = s % photos.length; // start offset
     setInterval(() => {
-      images[current].classList.remove("active");
+      const active = stack.querySelector("img.active");
+      if (active) active.classList.remove("active");
 
-      current = (current + 1) % images.length;
+      // Next photo in the global list
+      currentIndex = (currentIndex + 1) % photos.length;
 
-      // Random tilt on each new photo
-      const angle = (Math.random() * 20 - 10).toFixed(2);
-      images[current].style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      const newImg = document.createElement("img");
+      newImg.src = photos[currentIndex];
+      newImg.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
+      stack.appendChild(newImg);
 
-      images[current].classList.add("active");
-    }, 4000 + Math.random() * 2000); // stagger timing
+      // Fade in
+      requestAnimationFrame(() => newImg.classList.add("active"));
+
+      // Remove old images after a couple of cycles to prevent DOM bloat
+      if (stack.children.length > 5) {
+        stack.removeChild(stack.firstChild);
+      }
+    }, 4000 + Math.random() * 2000); // staggered timing
   });
 }
 
+function randAngle() {
+  return (Math.random() * 20 - 10).toFixed(2); // -10° to +10°
+}
+
 tryLoadNext();
+
 
 
 
