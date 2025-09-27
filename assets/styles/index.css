@@ -526,58 +526,42 @@
 
 
 /* ===========================
-   10. PHOTOS / STACKED ROTATORS
-   ---------------------------
-   Replaces old single carousel
+   10. PHOTOS / STACKED ROTATOR
    =========================== */
-
-/* Container for the three stacks */
 #photos .photo-stacks {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 32px;
-  flex-wrap: wrap; /* allow wrap on mobile */
+  gap: 32px;
+  margin-top: 28px;
+  flex-wrap: wrap;
 }
 
-/* Each stack */
-#photos .photo-stack {
+.photo-stack {
   position: relative;
-  width: 280px;          /* consistent width */
-  perspective: 1000px;
+  width: 280px;
   overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
 }
 
-/* Height variations */
-#photos .photo-stack.tall   { height: 320px; }
-#photos .photo-stack.medium { height: 260px; }
-#photos .photo-stack.short  { height: 200px; }
+/* Different heights for variety */
+.photo-stack.tall { height: 320px; }
+.photo-stack.medium { height: 260px; }
+.photo-stack.short { height: 200px; }
 
-/* Photos inside the stack */
-#photos .photo-stack img {
+.photo-stack img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-2);
   opacity: 0;
-  transform: rotate(-3deg) scale(0.95);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 1s ease;
 }
 
-/* The active/visible photo */
-#photos .photo-stack img.active {
+.photo-stack img.active {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
-  z-index: 2;
+  z-index: 1;
 }
 
-/* Add subtle randomness to stack “depth” */
-#photos .photo-stack img:nth-child(2) {
-  transform: rotate(4deg) scale(0.92);
-}
-#photos .photo-stack img:nth-child(3) {
-  transform: rotate(-5deg) scale(0.9);
-}

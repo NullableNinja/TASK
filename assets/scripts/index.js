@@ -125,59 +125,73 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===========================
-     6. PHOTO STACK ROTATOR (from photos.js)
-     ---------------------------
-     - Auto-detects files in /images/spotlight/
-     - Uses naming convention 01.jpg, 02.jpg, etc.
-     - Builds 3 stacks (stack1, stack2, stack3)
-     =========================== */
-  /*function buildPhotoStacks(folder, prefix, ext, stacks, maxPerStack) {
-    let index = 1;
-    const photos = [];
+/* ===========================
+   6. PHOTO STACK ROTATOR
+   ---------------------------
+   - Autoload spotlight images
+   - Split into 3 stacks
+   - Rotate with fade
+   =========================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const maxPhotos = 99;
+  const stacks = [
+    document.getElementById("stack1"),
+    document.getElementById("stack2"),
+    document.getElementById("stack3")
+  ];
+  const photos = [];
 
-    // Collect photos until a gap is found
-    while (true) {
-      const num = String(index).padStart(2, "0"); // 01, 02...
-      const path = `${folder}/${prefix}${num}.${ext}`;
-      const img = new Image();
-      img.src = path;
+  // Try loading sequentially until one fails
+  let index = 1;
+  function tryLoadNext() {
+    if (index > maxPhotos) return startRotation();
 
-      img.onload = () => {};
-      img.onerror = () => {}; // ignore missing
+    const num = String(index).padStart(2, "0"); // 01, 02...
+    const src = `images/spotlight/${num}.jpg`;
+    const img = new Image();
 
-      if (img.complete && img.naturalWidth === 0) break;
-      photos.push(path);
+    img.onload = () => {
+      photos.push(src);
       index++;
-    }
+      tryLoadNext();
+    };
 
-    // Initialize stacks
-    stacks.forEach(stackId => {
-      const stack = document.getElementById(stackId);
-      if (!stack) return;
+    img.onerror = () => {
+      // Stop at first failure
+      startRotation();
+    };
 
-      // Seed with first few random images
-      for (let i = 0; i < maxPerStack; i++) {
-        const src = photos[Math.floor(Math.random() * photos.length)];
-        const el = document.createElement("img");
-        el.src = src;
-        if (i === 0) el.classList.add("active");
-        stack.appendChild(el);
-      }
+    img.src = src;
+  }
 
+  // Randomly distribute photos into stacks
+  function startRotation() {
+    if (photos.length === 0) return;
+
+    photos.forEach((src, i) => {
+      const stack = stacks[i % stacks.length];
+      const img = document.createElement("img");
+      img.src = src;
+      if (i % stacks.length === 0) img.classList.add("active"); // first in each stack
+      stack.appendChild(img);
+    });
+
+    // Rotate every few seconds
+    stacks.forEach((stack) => {
       let current = 0;
-      const imgs = stack.querySelectorAll("img");
+      const images = stack.querySelectorAll("img");
+      if (images.length <= 1) return;
 
-      // Rotate images every 3–5s
       setInterval(() => {
-        imgs[current].classList.remove("active");
-        current = (current + 1) % imgs.length;
-        imgs[current].classList.add("active");
-      }, 3000 + Math.random() * 2000);
+        images[current].classList.remove("active");
+        current = (current + 1) % images.length;
+        images[current].classList.add("active");
+      }, 4000 + Math.random() * 2000); // stagger timing
     });
   }
 
-  // Run the builder
-  buildPhotoStacks("images/spotlight", "", "jpg", ["stack1", "stack2", "stack3"], 3);*/
+  tryLoadNext();
+});
+
 
 }); // <-- closes DOMContentLoaded
