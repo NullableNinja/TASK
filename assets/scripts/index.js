@@ -140,18 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   const photos = [];
 
-  // Helper: random angle
   function randAngle() {
     return Math.floor(Math.random() * 26 - 13); // -13° to +12°
   }
 
-  // Helper: random tape position
   function randomTapeClass() {
     const positions = ["tape-top", "tape-left", "tape-right", "tape-bottom"];
     return positions[Math.floor(Math.random() * positions.length)];
   }
 
-  // Load sequentially until a file fails
   let index = 1;
   function tryLoadNext() {
     if (index > maxPhotos) return startRotation();
@@ -173,30 +170,28 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = src;
   }
 
-  // Build stacks and rotate
   function startRotation() {
     if (photos.length === 0) return;
 
-    photos.forEach((src, i) => {
-      const stack = stacks[i % stacks.length];
-      const img = document.createElement("img");
-      img.src = src;
+    // Put *all* photos in *each* stack
+    stacks.forEach(stack => {
+      photos.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
 
-      // Random size
-      const sizes = ["small", "medium", "large"];
-      img.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
+        const sizes = ["small", "medium", "large"];
+        img.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
 
-      // Random rotation
-      img.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
+        img.style.transform = `rotate(${randAngle()}deg)`;
 
-      // Random tape placement
-      img.classList.add(randomTapeClass());
+        img.classList.add(randomTapeClass());
+        if (i === 0) img.classList.add("active");
 
-      if (i % stacks.length === 0) img.classList.add("active");
-      stack.appendChild(img);
+        stack.appendChild(img);
+      });
     });
 
-    // Cycle through images
+    // Cycle images in each stack
     stacks.forEach(stack => {
       let current = 0;
       const images = stack.querySelectorAll("img");
@@ -211,5 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   tryLoadNext();
+
 
 }); // <-- closes DOMContentLoaded
