@@ -125,14 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-/* ===========================
-   6. PHOTO STACK ROTATOR
-   ---------------------------
-   - Autoload spotlight images
-   - Split into 3 stacks
-   - Rotate with fade
-   =========================== */
-document.addEventListener("DOMContentLoaded", () => {
+  /* ===========================
+     6. PHOTO STACK ROTATOR
+     ---------------------------
+     - Autoload spotlight images
+     - Split into 3 stacks
+     - Rotate with fade
+     =========================== */
   const maxPhotos = 99;
   const stacks = [
     document.getElementById("stack1"),
@@ -191,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   tryLoadNext();
-});
 
 
 }); // <-- closes DOMContentLoaded
