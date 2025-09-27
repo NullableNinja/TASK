@@ -125,90 +125,91 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-/* ===========================
-   6. PHOTO STACK ROTATOR
-   ---------------------------
-   - Autoload spotlight images
-   - Split into 3 stacks
-   - Rotate with fade & tilt
-   - Loops even if #photos < #stacks
-   =========================== */
-const maxPhotos = 99;
-const stacks = [
-  document.getElementById("stack1"),
-  document.getElementById("stack2"),
-  document.getElementById("stack3")
-];
-const photos = [];
+  /* ===========================
+     6. PHOTO STACK ROTATOR
+     ---------------------------
+     - Autoload spotlight images
+     - Split into 3 stacks
+     - Rotate with fade
+     =========================== */
+  const maxPhotos = 99;
+  const stacks = [
+    document.getElementById("stack1"),
+    document.getElementById("stack2"),
+    document.getElementById("stack3")
+  ];
+  const photos = [];
 
-// Try loading sequentially until one fails
-let index = 1;
-function tryLoadNext() {
-  if (index > maxPhotos) return startRotation();
+  // Helper: random angle
+  function randAngle() {
+    return Math.floor(Math.random() * 26 - 13); // -13° to +12°
+  }
 
-  const num = String(index).padStart(2, "0"); // 01, 02...
-  const src = `images/spotlight/${num}.jpg`;
-  const img = new Image();
+  // Helper: random tape position
+  function randomTapeClass() {
+    const positions = ["tape-top", "tape-left", "tape-right", "tape-bottom"];
+    return positions[Math.floor(Math.random() * positions.length)];
+  }
 
-  img.onload = () => {
-    photos.push(src);
-    index++;
-    tryLoadNext();
-  };
+  // Load sequentially until a file fails
+  let index = 1;
+  function tryLoadNext() {
+    if (index > maxPhotos) return startRotation();
 
-  img.onerror = () => {
-    // Stop at first failure
-    startRotation();
-  };
+    const num = String(index).padStart(2, "0");
+    const src = `images/spotlight/${num}.jpg`;
+    const img = new Image();
 
-  img.src = src;
-}
+    img.onload = () => {
+      photos.push(src);
+      index++;
+      tryLoadNext();
+    };
 
-function startRotation() {
-  if (photos.length === 0) return;
+    img.onerror = () => {
+      startRotation();
+    };
 
-  // Seed each stack with its first photo
-  stacks.forEach((stack, i) => {
-    const img = document.createElement("img");
-    img.src = photos[i % photos.length];
-    img.classList.add("active");
-    img.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
-    stack.appendChild(img);
-  });
+    img.src = src;
+  }
 
-  // Rotate each stack independently
-  stacks.forEach((stack, s) => {
-    let currentIndex = s % photos.length; // start offset
-    setInterval(() => {
-      const active = stack.querySelector("img.active");
-      if (active) active.classList.remove("active");
+  // Build stacks and rotate
+  function startRotation() {
+    if (photos.length === 0) return;
 
-      // Next photo in the global list
-      currentIndex = (currentIndex + 1) % photos.length;
+    photos.forEach((src, i) => {
+      const stack = stacks[i % stacks.length];
+      const img = document.createElement("img");
+      img.src = src;
 
-      const newImg = document.createElement("img");
-      newImg.src = photos[currentIndex];
-      newImg.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
-      stack.appendChild(newImg);
+      // Random size
+      const sizes = ["small", "medium", "large"];
+      img.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
 
-      // Fade in
-      requestAnimationFrame(() => newImg.classList.add("active"));
+      // Random rotation
+      img.style.transform = `translate(-50%, -50%) rotate(${randAngle()}deg)`;
 
-      // Remove old images after a couple of cycles to prevent DOM bloat
-      if (stack.children.length > 5) {
-        stack.removeChild(stack.firstChild);
-      }
-    }, 4000 + Math.random() * 2000); // staggered timing
-  });
-}
+      // Random tape placement
+      img.classList.add(randomTapeClass());
 
-function randAngle() {
-  return (Math.random() * 20 - 10).toFixed(2); // -10° to +10°
-}
+      if (i % stacks.length === 0) img.classList.add("active");
+      stack.appendChild(img);
+    });
 
-tryLoadNext();
+    // Cycle through images
+    stacks.forEach(stack => {
+      let current = 0;
+      const images = stack.querySelectorAll("img");
+      if (images.length <= 1) return;
 
+      setInterval(() => {
+        images[current].classList.remove("active");
+        current = (current + 1) % images.length;
+        images[current].classList.add("active");
+      }, 4000 + Math.random() * 2000);
+    });
+  }
 
-
+  tryLoadNext();
 
 }); // <-- closes DOMContentLoaded

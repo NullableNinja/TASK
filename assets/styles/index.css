@@ -536,39 +536,63 @@
   flex-wrap: wrap;
 }
 
-/* Each stack container */
 .photo-stack {
   position: relative;
-  width: 260px;
-  height: 300px;
-  overflow: hidden;
-  perspective: 1000px;
+  width: 280px; /* base width */
+  height: 320px; /* base height */
+  overflow: visible;
 }
 
-/* Make each stack look like it’s casually scattered */
-#stack1 { transform: rotate(-4deg) translateY(10px); }
-#stack2 { transform: rotate(3deg) translateY(-10px); }
-#stack3 { transform: rotate(-2deg) translateY(20px); }
-
+/* Default image style */
 .photo-stack img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: auto;
-  height: 100%;
-  max-width: 120%; /* allow overhang */
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-2);
-
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+  background: #fff; /* acts like a photo border */
+  padding: 6px;     /* white edge like a printed photo */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
   opacity: 0;
-  transform: translate(-50%, -50%) rotate(0deg);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 1s ease;
+  object-fit: contain; /* no cropping */
 }
 
-/* Visible photo */
+/* Size variations */
+.photo-stack img.small {
+  width: 70%;
+  height: auto;
+}
+.photo-stack img.medium {
+  width: 85%;
+  height: auto;
+}
+.photo-stack img.large {
+  width: 100%;
+  height: auto;
+}
+
 .photo-stack img.active {
   opacity: 1;
   z-index: 2;
 }
+
+/* Tape effect */
+.photo-stack img::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 60px;
+  height: 18px;
+  background: rgba(255,255,200,0.8); /* pale masking tape */
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 3;
+  pointer-events: none;
+}
+
 
