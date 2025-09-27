@@ -538,12 +538,18 @@
 
 .photo-stack {
   position: relative;
-  width: 280px; /* base width */
-  height: 320px; /* base height */
-  overflow: visible;
+  width: 280px;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e1a23;
 }
 
-/* Default image style */
+/* All images sit centered in stack */
 .photo-stack img {
   position: absolute;
   top: 50%;
@@ -552,26 +558,11 @@
   max-width: 100%;
   max-height: 100%;
   border-radius: 6px;
-  background: #fff; /* acts like a photo border */
-  padding: 6px;     /* white edge like a printed photo */
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: #fff;
+  padding: 6px; /* photo border look */
   opacity: 0;
   transition: opacity 1s ease;
-  object-fit: contain; /* no cropping */
-}
-
-/* Size variations */
-.photo-stack img.small {
-  width: 70%;
-  height: auto;
-}
-.photo-stack img.medium {
-  width: 85%;
-  height: auto;
-}
-.photo-stack img.large {
-  width: 100%;
-  height: auto;
 }
 
 .photo-stack img.active {
@@ -579,20 +570,39 @@
   z-index: 2;
 }
 
+/* Fake sizes (force visual variety) */
+.photo-stack img.small { width: 60%; }
+.photo-stack img.medium { width: 80%; }
+.photo-stack img.large { width: 95%; }
+
 /* Tape effect */
-.photo-stack img::before {
+.photo-stack img::after {
   content: "";
   position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-3deg);
   width: 60px;
-  height: 18px;
-  background: rgba(255,255,200,0.8); /* pale masking tape */
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  height: 20px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   z-index: 3;
-  pointer-events: none;
 }
 
-
+.photo-stack img.tape-top::after {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+}
+.photo-stack img.tape-bottom::after {
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+}
+.photo-stack img.tape-left::after {
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%) rotate(90deg);
+}
+.photo-stack img.tape-right::after {
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%) rotate(-90deg);
+}
