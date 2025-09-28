@@ -186,6 +186,45 @@
   object-fit: contain;       /* no cropping */
 }
 
+/* ============================================================
+   PROGRAMS — MOBILE TWEAKS
+   ------------------------------------------------------------
+   - Buttons in a grid (2 per row, even width)
+============================================================ */
+@media (max-width: 768px) {
+  #programs .programs-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #programs .program-list {
+    display: grid;                          /* ✅ grid instead of flex */
+    grid-template-columns: 1fr 1fr;         /* ✅ always 2 per row */
+    gap: 10px;
+  }
+
+  #programs .program-btn {
+    flex: none;                             /* ✅ stop uneven shrink/grow */
+    width: 100%;                            /* ✅ fills grid cell evenly */
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  #programs .program-detail {
+    padding: 16px;
+    min-height: auto;
+  }
+  #programs .program-detail h3 { font-size: 1.2rem; }
+  #programs .program-detail p { font-size: 0.9rem; }
+  #programs .program-detail img {
+    max-width: 90%;
+    margin: 16px auto;
+  }
+}
+
+
 
 
 /* ============================================================
@@ -462,15 +501,18 @@
    8. CONTACT SECTION (#contact)
    ------------------------------------------------------------
    - "HI-YAH!" tiles with icons + text
+   - Now arranged side-by-side on desktop
 ============================================================ */
 
 #contact .contact-tiles {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;     /* ✅ left-right instead of stacked */
   gap: 20px;
   margin-top: 24px;
 }
+
 #contact .contact-tile {
+  flex: 1;                 /* ✅ equal width for both tiles */
   display: flex;
   align-items: center;
   gap: 16px;
@@ -479,12 +521,14 @@
   box-shadow: var(--elevation-2);
   text-decoration: none;
   transition: box-shadow 0.25s var(--ease-out), transform 0.2s var(--ease-out);
-  color: #fff; /* inverted for contrast */
+  color: #fff;
 }
+
 #contact .contact-tile:hover {
   box-shadow: var(--elevation-3);
   transform: translateY(-3px);
 }
+
 #contact .contact-tile:active {
   transform: scale(0.97);
   box-shadow: var(--elevation-1);
@@ -529,6 +573,16 @@
 #contact .contact-tile.phone {
   background: #007F7F; /* friendly teal */
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE — stack vertically again
+============================================================ */
+@media (max-width: 768px) {
+  #contact .contact-tiles {
+    flex-direction: column;  /* ✅ back to stacked on mobile */
+  }
+}
+
 
 
 /* ============================================================

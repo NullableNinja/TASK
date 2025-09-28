@@ -1,108 +1,67 @@
 <!doctype html>
-<!--
-  ===============================================
-  schedule.html  (USES SHARED HEADER/FOOTER + EXTERNAL CSS)
-  -----------------------------------------------
-  PURPOSE
-  • Show weekly schedules in clean, scannable tables.
-  • Reuse the same header/footer HTML + CSS as index.html.
-  • Work OFFLINE when opened from your file system.
-
-  QUICK EDITS (CHANGE THESE):
-  1) Page title/description in <head>.
-  2) The two PDF download links in the "downloads" row.
-  3) The schedule times in the DATA section at the bottom of this file.
-     - Edit arrays: `kids` and `adults`.
-     - Use "*" after a time to mark 1-hour classes (e.g., "5:00 pm*").
-     - Use "/" to stack multiple times in the same day (e.g., "9:30 am* / 7:00 pm*").
-  4) Address band at the bottom (update address or phone).
-
-  WHAT TO LEAVE ALONE (USUALLY):
-  • <div id="site-header"></div> and <div id="site-footer"></div>
-    - These are where header.html and footer.html get injected by /assets/js/partials.js
-  • The <link> tags for header.css / main.css / footer.css / schedule.css
-  • The <script> includes at the end (partials.js + main.js)
-    - main.js safely ignores widgets that aren’t on this page.
-
-  FILES THIS PAGE RELIES ON:
-  • /header.html + /assets/css/header.css     (shared header)
-  • /footer.html + /assets/css/footer.css     (shared footer)
-  • /assets/css/main.css                      (cards, buttons, layout, background)
-  • /assets/css/schedule.css                  (schedule-only table/utility styles)
-  • /assets/js/partials.js                    (injects header & footer)
-  • /assets/js/main.js                        (year setter etc.; guards for missing elements)
-
-  ACCESSIBILITY NOTES:
-  • Tables have aria-labels.
-  • Section headings are semantic (h1, h2).
-  • “Skip to content” link provided at top.
-  ===============================================
--->
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Task Karate – Schedules</title>
-  <meta name="description" content="Weekly schedules for Task Karate School in the La Crosse area. Download PDFs and view current class times."/>
-  <link rel="icon" href="TASK-NEW-LOGO.png"/>
+  <meta name="description" content="Weekly schedules for Task Karate School in La Crosse, Wisconsin. Download PDFs or browse current class times."/>
+  <link rel="icon" href="../images/logo/ArtisanApothecaryLogo.png"/>
 
-  <!-- Optional web fonts (works offline with system fallbacks) -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
 
-  <!-- SHARED STYLES: header → main → footer (keep order) -->
-  <link rel="stylesheet" href="assets/css/header.css"/>
-  <link rel="stylesheet" href="assets/css/main.css"/>
-  <link rel="stylesheet" href="assets/css/footer.css"/>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="../assets/styles/base.css"/>
+  <link rel="stylesheet" href="../assets/styles/navigation-bar.css"/>
+  <link rel="stylesheet" href="../assets/styles/footer.css"/>
 
-  <!-- PAGE-SPECIFIC STYLES -->
-  <link rel="stylesheet" href="assets/css/schedule.css"/>
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="../assets/styles/schedule.css"/>
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
+  <!-- Skip link -->
   <a class="skip-link" href="#page-start">Skip to content</a>
 
-  <!-- Decorative background (styled in main.css) -->
+  <!-- Decorative background -->
   <div class="bg-geo" aria-hidden="true"></div>
 
-  <!-- HEADER mounts here from /header.html via /assets/js/partials.js -->
+  <!-- Header partial -->
   <div id="site-header"></div>
 
-  <!-- ==============
+  <!-- =====================
        MAIN CONTENT
-       ============== -->
+  ====================== -->
   <main id="page-start" class="container">
-    <!-- Page header + downloads -->
-    <section>
+    <!-- Intro / downloads -->
+    <section class="stack-soft">
       <div class="card layered-soft">
         <span class="eyebrow">La Crosse, Wisconsin</span>
         <h1>Schedules</h1>
         <p class="muted">
-          Download a PDF or browse the live tables below. Not sure where you fit?
+          Download a PDF or browse the live tables below. Not sure where you fit? 
           Call us—we’ll point you to the right class.
         </p>
-
-        <!-- CHANGE THESE PDF LINKS -->
         <div class="downloads">
-          <a class="btn square" href="files/task-schedule-kids.pdf" download>Download Kids PDF</a>
-          <a class="btn navy square" href="files/task-schedule-teens-adults.pdf" download>Download Teens &amp; Adults PDF</a>
+          <a class="btn square" href="../files/task-schedule-kids.pdf" download>Download Kids PDF</a>
+          <a class="btn navy square" href="../files/task-schedule-teens-adults.pdf" download>Download Teens &amp; Adults PDF</a>
         </div>
       </div>
     </section>
 
-    <!-- Global notes (one-time read) -->
-    <section>
+    <!-- Global notes -->
+    <section class="stack-soft">
       <div class="card layered-soft">
         <span class="eyebrow">How these schedules work</span>
         <ul class="muted list-tight">
           <li>All classes are 45 minutes unless marked with an asterisk (*).</li>
           <li>Mat Class focuses on groundwork/grappling skills.</li>
-          <li>Sparring Class — <strong>gear required</strong>. Ask at the front desk if you’re unsure.</li>
+          <li>Sparring Class — <strong>gear required</strong>. Ask if you’re unsure.</li>
         </ul>
       </div>
     </section>
 
     <!-- Kids -->
-    <section id="kids">
+    <section id="kids" class="stack-soft">
       <div class="card layered-off">
         <h2>Kids</h2>
         <div class="table-scroller">
@@ -121,7 +80,7 @@
     </section>
 
     <!-- Teens & Adults -->
-    <section id="adults">
+    <section id="adults" class="stack-soft">
       <div class="card layered-off">
         <h2>Teens &amp; Adults</h2>
         <div class="table-scroller">
@@ -136,8 +95,8 @@
       </div>
     </section>
 
-    <!-- IS3 / Eskrima -->
-    <section id="eskrima">
+    <!-- Eskrima -->
+    <section id="eskrima" class="stack-soft">
       <div class="card layered-off">
         <h2>IS3 • Eskrima</h2>
         <div class="table-scroller">
@@ -156,7 +115,7 @@
     </section>
 
     <!-- Testing -->
-    <section id="testing">
+    <section id="testing" class="stack-soft">
       <div class="card layered-off">
         <h2>Testing</h2>
         <div class="table-scroller">
@@ -173,7 +132,7 @@
       </div>
     </section>
 
-    <!-- Address band (update address/phone as needed) -->
+    <!-- Address band -->
     <div class="address-band">
       <div class="addr-left">
         <svg class="addr-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -191,57 +150,38 @@
     </div>
   </main>
 
-  <!-- FOOTER mounts here from /footer.html -->
+  <!-- Footer partial -->
   <div id="site-footer"></div>
 
-  <!-- =======================
-       SCRIPTS (ORDER MATTERS)
-       -----------------------
-       1) partials.js defines mountPartials() to inject header/footer.
-       2) We call mountPartials() immediately.
-       3) main.js sets the footer year and powers other UI (safely no-ops here).
-       4) Inline script below renders schedule tables (edit data there).
-     ======================= -->
-  <script src="assets/js/partials.js"></script>
+  <!-- Scripts -->
+  <script src="../assets/scripts/partials.js"></script>
   <script>mountPartials();</script>
-  <script src="assets/js/main.js"></script>
+  <script src="../assets/scripts/main.js"></script>
 
-  <!-- ================
-       DATA + RENDERING
-       ----------------
-       HOW TO EDIT TIMES:
-       • Update the arrays below. Days must be Mon/Tue/Wed/Thu/Fri/Sat keys.
-       • Multiple times in one day? Separate with "/" (they’ll stack as pills).
-       • 1-hour classes? Add "*" after the time (e.g., "5:00 pm*").
-       ================ -->
+  <!-- Data + rendering -->
   <script>
-    // ---- KIDS SCHEDULE (EDIT ME) ----
     const kids = [
-      { group:"White Gold",     Mon:"",        Tue:"6:00 pm",               Wed:"",        Thu:"5:00 pm", Fri:"",        Sat:"11:30 am" },
-      { group:"Orange",         Mon:"4:00 pm", Tue:"",                      Wed:"",        Thu:"6:00 pm", Fri:"",        Sat:"11:30 am" },
-      { group:"Green",          Mon:"",        Tue:"5:00 pm",               Wed:"",        Thu:"4:00 pm", Fri:"",        Sat:"10:30 am" },
-      { group:"Purple",         Mon:"",        Tue:"5:00 pm",               Wed:"",        Thu:"4:00 pm", Fri:"",        Sat:"10:30 am" },
-      { group:"Blue",           Mon:"",        Tue:"5:00 pm",               Wed:"4:00 pm", Thu:"",        Fri:"",        Sat:"10:30 am" },
-      { group:"Red",            Mon:"",        Tue:"5:00 pm",               Wed:"4:00 pm", Thu:"",        Fri:"",        Sat:"10:30 am" },
-      { group:"Brown",          Mon:"5:00 pm*",Tue:"5:00 pm",               Wed:"4:00 pm", Thu:"",        Fri:"",        Sat:"10:30 am" },
-      { group:"Black",          Mon:"6:00 pm*",Tue:"5:00 pm",               Wed:"",        Thu:"",        Fri:"",        Sat:"10:30 am" },
-      { group:"Sparring",       Mon:"",        Tue:"4:00 pm",               Wed:"",        Thu:"",        Fri:"",        Sat:"" },
-      { group:"Weapons",        Mon:"",        Tue:"",                      Wed:"6:00 pm*",Thu:"",        Fri:"",        Sat:"" }, /* Brown belts 9:45 am (see legend) */
-      { group:"Mat Class",      Mon:"",        Tue:"",                      Wed:"",        Thu:"",        Fri:"5:00 pm", Sat:"" }
+      { group:"White Gold", Mon:"", Tue:"6:00 pm", Wed:"", Thu:"5:00 pm", Fri:"", Sat:"11:30 am" },
+      { group:"Orange", Mon:"4:00 pm", Tue:"", Wed:"", Thu:"6:00 pm", Fri:"", Sat:"11:30 am" },
+      { group:"Green", Mon:"", Tue:"5:00 pm", Wed:"", Thu:"4:00 pm", Fri:"", Sat:"10:30 am" },
+      { group:"Purple", Mon:"", Tue:"5:00 pm", Wed:"", Thu:"4:00 pm", Fri:"", Sat:"10:30 am" },
+      { group:"Blue", Mon:"", Tue:"5:00 pm", Wed:"4:00 pm", Thu:"", Fri:"", Sat:"10:30 am" },
+      { group:"Red", Mon:"", Tue:"5:00 pm", Wed:"4:00 pm", Thu:"", Fri:"", Sat:"10:30 am" },
+      { group:"Brown", Mon:"5:00 pm*", Tue:"5:00 pm", Wed:"4:00 pm", Thu:"", Fri:"", Sat:"10:30 am" },
+      { group:"Black", Mon:"6:00 pm*", Tue:"5:00 pm", Wed:"", Thu:"", Fri:"", Sat:"10:30 am" },
+      { group:"Sparring", Mon:"", Tue:"4:00 pm", Wed:"", Thu:"", Fri:"", Sat:"" },
+      { group:"Weapons", Mon:"", Tue:"", Wed:"6:00 pm*", Thu:"", Fri:"", Sat:"" },
+      { group:"Mat Class", Mon:"", Tue:"", Wed:"", Thu:"", Fri:"5:00 pm", Sat:"" }
     ];
-
-    // ---- TEENS & ADULTS SCHEDULE (EDIT ME) ----
     const adults = [
-      { group:"White • Gold • Orange", Mon:"",      Tue:"9:30 am* / 7:00 pm*", Wed:"",      Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
-      { group:"Green Belt & up",       Mon:"",      Tue:"9:30 am* / 7:00 pm*", Wed:"",      Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
-      { group:"Brown",                 Mon:"5:00 pm*", Tue:"9:30 am* / 7:00 pm*", Wed:"",   Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
-      { group:"Black",                 Mon:"6:00 pm*", Tue:"9:30 am* / 7:00 pm*", Wed:"9:30 am* / 7:00 pm*", Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
-      { group:"Mat Class (mixed)",     Mon:"",      Tue:"",                    Wed:"",      Thu:"",                   Fri:"",         Sat:"5:00 pm" },
-      { group:"Sparring",              Mon:"",      Tue:"",                    Wed:"",      Thu:"",                   Fri:"",         Sat:"9:45 am" },
-      { group:"Weapons (Green & up)",  Mon:"",      Tue:"7:00 pm*",            Wed:"",      Thu:"",                   Fri:"",         Sat:"" }
+      { group:"White • Gold • Orange", Mon:"", Tue:"9:30 am* / 7:00 pm*", Wed:"", Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
+      { group:"Green Belt & up", Mon:"", Tue:"9:30 am* / 7:00 pm*", Wed:"", Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
+      { group:"Brown", Mon:"5:00 pm*", Tue:"9:30 am* / 7:00 pm*", Wed:"", Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
+      { group:"Black", Mon:"6:00 pm*", Tue:"9:30 am* / 7:00 pm*", Wed:"9:30 am* / 7:00 pm*", Thu:"9:30 am* / 7:00 pm*", Fri:"6:00 pm*", Sat:"9:00 am" },
+      { group:"Mat Class (mixed)", Mon:"", Tue:"", Wed:"", Thu:"", Fri:"", Sat:"5:00 pm" },
+      { group:"Sparring", Mon:"", Tue:"", Wed:"", Thu:"", Fri:"", Sat:"9:45 am" },
+      { group:"Weapons (Green & up)", Mon:"", Tue:"7:00 pm*", Wed:"", Thu:"", Fri:"", Sat:"" }
     ];
-
-    // ---- RENDER TABLES (no changes needed) ----
     function renderRows(data){
       const days = ["Mon","Tue","Wed","Thu","Fri","Sat"];
       return data.map(row => `
@@ -253,33 +193,23 @@
     document.getElementById('kidsBody').innerHTML  = renderRows(kids);
     document.getElementById('adultBody').innerHTML = renderRows(adults);
 
-    // ---- MAKE TIMES INTO “PILLS” (handles single or multiple) ----
     (function pillifyTimes(){
       const timeOnly = /^\s*\d{1,2}:\d{2}\s*(?:am|pm)\*?\s*$/i;
-
       document.querySelectorAll('.table-scroller table tbody td:not(:first-child)').forEach(td=>{
         const raw = (td.textContent||"").trim();
         if(!raw){ td.textContent=""; return; }
-
-        // Multiple times -> stack as pills
         if(/[\/,]/.test(raw)){
-          const parts = raw.split(/[\/,]/).map(s=>s.trim()).filter(Boolean);
-          if(parts.length){
-            const wrap = document.createElement('div');
-            wrap.className = 'tstack';
-            parts.forEach(p=>{
-              const span = document.createElement('span');
-              span.className = 'time';
-              span.textContent = p;
-              wrap.appendChild(span);
-            });
-            td.textContent = '';
-            td.appendChild(wrap);
-            return;
-          }
+          const wrap = document.createElement('div');
+          wrap.className = 'tstack';
+          raw.split(/[\/,]/).map(s=>s.trim()).filter(Boolean).forEach(p=>{
+            const span = document.createElement('span');
+            span.className = 'time';
+            span.textContent = p;
+            wrap.appendChild(span);
+          });
+          td.textContent = ''; td.appendChild(wrap);
+          return;
         }
-
-        // Single time -> single pill
         if(timeOnly.test(raw)){
           td.textContent = '';
           const span = document.createElement('span');

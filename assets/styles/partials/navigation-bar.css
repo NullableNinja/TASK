@@ -70,32 +70,53 @@
    NAV LINKS (individual <a>)
    =========================== */
 .navbar .nav-links a {
+  position: relative;          /* allow underline effect */
   display: inline-block;
-  padding: 6px 12px;
+  padding: 8px 16px;
 
-  /* Rounded button-like style */
-  border-radius: 10px;
+  /* Rounded pill style */
+  border-radius: 12px;
 
   /* Typography */
-  font-weight: 700;
+  font-weight: 800;
   text-decoration: none;
   color: #fff;
 
-  /* Subtle glassy background */
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* Glassy background */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px) saturate(140%);
 
-  /* Smooth animation on hover */
-  transition: background 0.25s, transform 0.15s;
+  /* Depth + transition */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  transition: all 0.25s ease;
 }
 
-/* ===========================
-   NAV LINKS (hover effect)
-   =========================== */
+/* Hover effect — glass shift + scale */
 .navbar .nav-links a:hover {
-  background: rgba(31, 94, 161, 0.4); /* TASK blue highlight */
-  transform: scale(1.05);             /* slight zoom */
+  background: rgba(31, 94, 161, 0.35); /* subtle TASK blue glow */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
 }
+
+/* Karate strike underline (hidden until hover) */
+.navbar .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 3px;
+  background: var(--task-400);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-links a:hover::after {
+  width: 60%; /* underline “strike” */
+}
+
 
 /* ===========================
    DROPDOWN MENU
