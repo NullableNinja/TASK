@@ -1,25 +1,31 @@
 /* ==============================
-   FOOTER LAYOUT (compact)
+   FOOTER LAYOUT (fixed/clean)
    ============================== */
 footer {
   background: #0f1a25; /* match site theme */
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 12px 24px;              /* tightened padding */
+  padding: 16px 24px;              /* more breathing room */
   font-size: 0.9rem;
   color: #cdd6df;
+  position: relative;              /* anchor for overlays */
+  z-index: 5;                      /* below FABs but above bg */
 }
 
 .footer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;                 /* stack on mobile */
-  gap: 12px;
+  flex-wrap: wrap;                 /* stack on small screens */
+  gap: 16px;
 }
 
+/* copyright line */
 .footer-row div {
-  opacity: 0.85;                   /* copyright text */
+  opacity: 0.85;
   font-size: 0.85rem;
+  flex: 1 1 auto;                  /* allows flex resizing */
+  text-align: left;
+  min-width: 200px;                /* keep it from shrinking too far */
 }
 
 /* ==============================
@@ -28,9 +34,11 @@ footer {
 .socials {
   list-style: none;
   display: flex;
-  gap: 10px;
+  justify-content: flex-end;       /* align to the right */
+  gap: 12px;
   margin: 0;
   padding: 0;
+  flex: 0 0 auto;                  /* don’t let it squish */
 }
 
 .socials li {
@@ -41,9 +49,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;       /* compact button size */
-  height: 36px;
-  border-radius: 8px;
+  width: 40px;       /* slightly bigger for touch targets */
+  height: 40px;
+  border-radius: 10px;
   background: rgba(255,255,255,0.08);
   transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -53,24 +61,34 @@ footer {
   transform: translateY(-2px);
 }
 
-/* force SVGs to fit inside their buttons */
 .socials .soc {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
   color: #fff;
 }
 
 /* ==============================
-   SCROLL INDICATOR
+   MOBILE RESPONSIVE FOOTER
    ============================== */
-#scroll-indicator {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 6px;
-  width: 0%;
-  background: #fff;  /* overwritten by JS belt colors */
-  z-index: 9999;
-  transition: width 0.1s linear, background 0.3s ease;
+@media (max-width: 600px) {
+  .footer-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .socials {
+    justify-content: center;
+  }
+}
+
+/* ==============================
+   SPACE FOR FLOATING BUTTONS
+   ------------------------------
+   Add extra padding-bottom so
+   "Contact" and "ToTop" buttons
+   don’t overlap footer content.
+   ============================== */
+body {
+  padding-bottom: 80px; /* adjust based on FAB size */
 }

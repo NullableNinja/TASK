@@ -40,21 +40,20 @@
    BRAND / LOGO
    =========================== */
 .navbar .nav-brand {
-  position: relative;   /* reference for absolute positioning */
+  position: relative;   /* contain the logo */
 }
 
 .navbar .nav-brand img.logo {
-  height: 80px;        /* nice big sticker */
+  height: 80px;        /* nice big sticker on desktop */
   width: auto;
   display: block;
 
   position: absolute;  /* float on top of navbar */
   top: -35px;          /* scoot up so it overlaps */
-  left: 0;             /* stick to the left edge */
+  left: 0;
   z-index: 1100;       /* make sure it sits above navbar background */
   pointer-events: none; /* so clicks go "through" the sticker */
 }
-
 
 /* ===========================
    NAV LINKS (UL container)
@@ -97,7 +96,6 @@
   background: rgba(31, 94, 161, 0.4); /* TASK blue highlight */
   transform: scale(1.05);             /* slight zoom */
 }
-
 
 /* ===========================
    DROPDOWN MENU
@@ -148,16 +146,25 @@
   transform: none; /* disable top-level scale */
 }
 
-
 /* ===========================
    MOBILE NAVIGATION
    =========================== */
 @media (max-width: 768px) {
   .navbar {
-    padding: 8px 14px;
+    padding: 10px 14px;
+    height: 70px; /* ✅ space for logo + hamburger */
+    align-items: center;
   }
 
-  /* Hide the horizontal nav */
+  /* Logo smaller + inline */
+  .navbar .nav-brand img.logo {
+    height: 60px;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  /* Hide nav links by default */
   .navbar .nav-links {
     display: none;
     position: absolute;
@@ -169,22 +176,24 @@
     backdrop-filter: blur(12px);
     padding: 12px;
     border-radius: 0 0 14px 14px;
+    z-index: 1000;
   }
 
-  /* Show when toggled */
+  /* Show when toggled via JS */
   .navbar .nav-links.active {
     display: flex;
   }
 
-  /* Hamburger button */
+  /* Hamburger button (✅ force it visible) */
   .navbar .hamburger {
-    display: block;
+    display: block !important; /* 🔥 override desktop hiding */
     cursor: pointer;
     background: none;
     border: none;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    line-height: 1;
     color: #fff;
-    z-index: 1100;
+    z-index: 1101; /* above nav */
   }
 }
 
@@ -192,3 +201,4 @@
 .navbar .hamburger {
   display: none;
 }
+

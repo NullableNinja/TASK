@@ -1,16 +1,20 @@
-/* ===========================
+/* ============================================================
    INDEX.JS — HOMEPAGE SCRIPTS
-   ---------------------------
-   - Scripts that apply ONLY to index.html
-   - Global scripts go in base.js
-   - Component/partial scripts go in assets/scripts/partials/
-   =========================== */
+   ------------------------------------------------------------
+   Scope:
+   - Runs only on index.html
+   - Global/shared scripts live in base.js
+   - Component/partial scripts live in assets/scripts/partials/
+   ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===========================
+  /* ============================================================
      1. TRIAL EXPIRATION DATE
-     =========================== */
+     ------------------------------------------------------------
+     - Finds #trialExp placeholder
+     - Fills it with a date 14 days from today
+     ============================================================ */
   const trialExp = document.getElementById("trialExp");
   if (trialExp) {
     const date = new Date();
@@ -18,9 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     trialExp.textContent = date.toLocaleDateString();
   }
 
-  /* ===========================
-     2. PHOTO CAROUSEL (old)
-     =========================== */
+  /* ============================================================
+     2. PHOTO CAROUSEL (legacy block, #carousel only)
+     ------------------------------------------------------------
+     - Left/right nav buttons move the carousel
+     - Works only if #slides and .nav buttons exist
+     ============================================================ */
   const slides = document.getElementById("slides");
   const navButtons = document.querySelectorAll("#carousel .nav button");
   let currentSlide = 0;
@@ -40,9 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ===========================
+  /* ============================================================
      3. CONTACT WIDGET
-     =========================== */
+     ------------------------------------------------------------
+     - FAB button toggles the quick message panel
+     ============================================================ */
   const openPanelBtn = document.getElementById("openPanel");
   const panel = document.getElementById("panel");
 
@@ -52,29 +61,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  
-/* ===========================
+/* ============================================================
    4. TRIAL POPOVER
-   =========================== */
+   ------------------------------------------------------------
+   - Shows the coupon popup after 5s (desktop only)
+   - Mobile devices are excluded completely
+   ============================================================ */
 const trialPop = document.getElementById("trialPop");
 const closeBtn = trialPop?.querySelector(".close");
 
-// Only show popover on desktop/tablet (not mobile)
+// ✅ ONE consistent helper for mobile detection
 function isMobile() {
   return window.matchMedia("(max-width: 768px)").matches;
 }
 
-if (trialPop && closeBtn && !isMobile()) {
-  setTimeout(() => { trialPop.style.display = "block"; }, 5000);
+// Show only on desktop (skip mobile)
+if (trialPop && closeBtn) {
+  if (!isMobile()) {
+    // Show after 5s
+    setTimeout(() => {
+      trialPop.style.display = "block";
+    }, 5000);
+  } else {
+    // Force-hide on mobile (safety)
+    trialPop.style.display = "none";
+  }
+
+  // Close button always works
   closeBtn.addEventListener("click", () => {
     trialPop.style.display = "none";
   });
 }
 
 
-  /* ===========================
+  /* ============================================================
      5. PROGRAM SWITCHER
-     =========================== */
+     ------------------------------------------------------------
+     - Four program buttons
+     - Swap content (title, desc, image) into .program-detail
+     ============================================================ */
   const programData = {
     kids: {
       title: "Kids Karate",
@@ -109,22 +134,26 @@ if (trialPop && closeBtn && !isMobile()) {
 
   programButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+      // clear active, set clicked
       programButtons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
       const key = btn.dataset.program;
       const program = programData[key];
 
+      // fade out
       programTitle.style.opacity = 0;
       programDesc.style.opacity = 0;
       programImg.style.opacity = 0;
 
       setTimeout(() => {
+        // update content
         programTitle.textContent = program.title;
         programDesc.textContent = program.desc;
         programImg.src = program.img;
         programImg.alt = program.alt;
 
+        // fade back in
         programTitle.style.opacity = 1;
         programDesc.style.opacity = 1;
         programImg.style.opacity = 1;
@@ -132,119 +161,118 @@ if (trialPop && closeBtn && !isMobile()) {
     });
   });
 
+  /* ============================================================
+     6. PHOTO STACK ROTATOR
+     ------------------------------------------------------------
+     - Loads spotlight images from /images/spotlight/NN.jpg
+     - Desktop: 3 stacks (random sizes, tape, angles)
+     - Mobile: only stack1 (clean, full-frame)
+     - Rotates with fade every 4-6 seconds
+     ============================================================ */
+  const maxPhotos = 99;
+  const stacks = [
+    document.getElementById("stack1"),
+    document.getElementById("stack2"),
+    document.getElementById("stack3")
+  ];
+  const photos = [];
 
+  // Random helpers (desktop only)
+  function randAngle() {
+    return Math.floor(Math.random() * 26 - 13); // -13° to +12°
+  }
+  function randOffset() {
+    return Math.floor(Math.random() * 16 - 8); // -8px to +8px
+  }
+  function randomTapeClass() {
+    const positions = ["tape-top", "tape-bottom", "tape-left", "tape-right"];
+    return positions[Math.floor(Math.random() * positions.length)];
+  }
 
-/* ===========================
-   6. PHOTO STACK ROTATOR
-   ---------------------------
-   - Autoload spotlight images
-   - Fill each stack
-   - Rotate with fade
-   =========================== */
-const maxPhotos = 99;
-const stacks = [
-  document.getElementById("stack1"),
-  document.getElementById("stack2"),
-  document.getElementById("stack3")
-];
-const photos = [];
+  // Load images sequentially until one is missing
+  let index = 1;
+  function tryLoadNext() {
+    if (index > maxPhotos) return startRotation();
 
-// Helpers
-function randAngle() {
-  return Math.floor(Math.random() * 26 - 13); // -13° to +12°
-}
-function randOffset() {
-  return Math.floor(Math.random() * 16 - 8); // -8px to +8px
-}
-function randomTapeClass() {
-  const positions = ["tape-top", "tape-bottom", "tape-left", "tape-right"];
-  return positions[Math.floor(Math.random() * positions.length)];
-}
+    const num = String(index).padStart(2, "0");
+    const src = `images/spotlight/${num}.jpg`;
+    const img = new Image();
 
-// Load sequentially until missing
-let index = 1;
-function tryLoadNext() {
-  if (index > maxPhotos) return startRotation();
+    img.onload = () => {
+      photos.push(src);
+      index++;
+      tryLoadNext();
+    };
 
-  const num = String(index).padStart(2, "0");
-  const src = `images/spotlight/${num}.jpg`;
-  const img = new Image();
+    img.onerror = () => {
+      startRotation();
+    };
 
-  img.onload = () => {
-    photos.push(src);
-    index++;
-    tryLoadNext();
-  };
+    img.src = src;
+  }
 
-  img.onerror = () => {
-    startRotation();
-  };
+  // Build stacks and animate
+  function startRotation() {
+    if (photos.length === 0) return;
 
-  img.src = src;
-}
+    // ✅ desktop = all 3 stacks, mobile = only stack1
+    const targetStacks = isMobile() ? [stacks[0]] : stacks;
 
-// Build stacks and animate
-function startRotation() {
-  if (photos.length === 0) return;
+    targetStacks.forEach((stack) => {
+      photos.forEach((src, i) => {
+        const frame = document.createElement("div");
+        frame.classList.add("photo-frame");
 
-  // Ensure each stack gets all photos (so rotation works even with few images)
-  stacks.forEach((stack, sIndex) => {
-    photos.forEach((src, i) => {
-      const frame = document.createElement("div");
-      frame.classList.add("photo-frame");
+        if (!isMobile()) {
+          // desktop gets random size/tape/angle
+          const sizes = ["small", "medium", "large"];
+          frame.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
+          frame.classList.add(randomTapeClass());
+          frame.style.transform =
+            `translate(-50%, -50%) rotate(${randAngle()}deg) ` +
+            `translate(${randOffset()}px, ${randOffset()}px)`;
+        } else {
+          // mobile = clean, no transform
+          frame.style.transform = "none";
+        }
 
-      // Random size + tape + angle
-      const sizes = ["small", "medium", "large"];
-      frame.classList.add(sizes[Math.floor(Math.random() * sizes.length)]);
-      frame.classList.add(randomTapeClass());
+        const img = document.createElement("img");
+        img.src = src;
+        frame.appendChild(img);
 
-      frame.style.transform = 
-        `translate(-50%, -50%) rotate(${randAngle()}deg) 
-         translate(${randOffset()}px, ${randOffset()}px)`;
-
-      // Image inside
-      const img = document.createElement("img");
-      img.src = src;
-      frame.appendChild(img);
-
-      // First photo in each stack is active
-      if (i === 0) frame.classList.add("active");
-
-      stack.appendChild(frame);
+        if (i === 0) frame.classList.add("active"); // first image visible
+        stack.appendChild(frame);
+      });
     });
-  });
 
-  // Rotate frames in each stack
-  stacks.forEach(stack => {
-    let current = 0;
-    const frames = stack.querySelectorAll(".photo-frame");
-    if (frames.length <= 1) return;
+    // Rotation logic
+    targetStacks.forEach((stack) => {
+      let current = 0;
+      const frames = stack.querySelectorAll(".photo-frame");
+      if (frames.length <= 1) return;
 
-    setInterval(() => {
-      frames[current].classList.remove("active");
-      current = (current + 1) % frames.length;
-      frames[current].classList.add("active");
-    }, 4000 + Math.random() * 2000);
-  });
-}
+      setInterval(() => {
+        frames[current].classList.remove("active");
+        current = (current + 1) % frames.length;
+        frames[current].classList.add("active");
+      }, 4000 + Math.random() * 2000); // 4-6 seconds
+    });
+  }
 
-tryLoadNext();
+  tryLoadNext();
 
+  /* ============================================================
+     7. MOBILE NAV TOGGLE
+     ------------------------------------------------------------
+     - Hamburger toggles nav links
+     ============================================================ */
+  const hamburger = document.querySelector('.navbar .hamburger');
+  const navLinks = document.querySelector('.navbar .nav-links');
 
-/* ===========================
-   7. MOBILE NAV TOGGLE
-   =========================== */
-const hamburger = document.querySelector('.navbar .hamburger');
-const navLinks = document.querySelector('.navbar .nav-links');
-
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-}
-
-
-
-
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  }
 
 }); // <-- closes DOMContentLoaded
