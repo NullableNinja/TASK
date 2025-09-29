@@ -1,6 +1,8 @@
 /* =============================
    schedule.css
    Dedicated styles for schedule tables
+   Includes fixed Program column,
+   equal-width day columns, and sticky Program column
 ============================= */
 
 .table-scroller {
@@ -17,37 +19,59 @@
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  min-width: 720px;
+  min-width: 640px; /* ✅ smaller min width to reduce empty scroll space */
   table-layout: fixed;
   font-size: 0.95rem;
   color: var(--ink);
 }
 
+/* Headings */
 .table-scroller thead th {
   position: sticky;
   top: 0;
   background: linear-gradient(180deg,#f7fbff,#f0f4f8);
   color: var(--ink);
-  text-align: left;
+  text-align: center;
   font-weight: 900;
   border-bottom: 2px solid #d7e4f2;
   padding: 12px 14px;
   white-space: nowrap;
   box-shadow: inset 0 -2px 0 rgba(0,0,0,.05);
+  z-index: 1;
 }
 
+/* Program column — narrower */
+.table-scroller th:first-child,
+.table-scroller td:first-child {
+  width: 140px;          /* ✅ reduced from 200px */
+  min-width: 120px;
+  max-width: 160px;
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  position: sticky;
+  left: 0;
+  background: #fff;
+  z-index: 2;
+  border-right: 1px solid #e2e8f0;
+  color: var(--task-500);
+}
+
+/* Day columns — auto-adjusted */
+.table-scroller th:not(:first-child),
+.table-scroller td:not(:first-child) {
+  width: calc((100% - 140px) / 6); /* ✅ more room now for Mon–Sat */
+  text-align: center;
+}
+
+/* Table body cells */
 .table-scroller td {
   padding: 10px 14px;
   border-bottom: 1px solid #e2e8f0;
-  text-align: left;
   vertical-align: middle;
-}
-
-/* First column (group names) */
-.table-scroller tbody td:first-child {
-  font-weight: 700;
-  white-space: nowrap;
-  color: var(--task-500);
 }
 
 /* Time “pill” styling */
@@ -64,12 +88,12 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Multiple stacked pills in one cell */
+/* Multiple stacked pills */
 .tstack {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 /* Legend */
@@ -78,4 +102,39 @@
   color: var(--muted);
   margin-top: 10px;
   line-height: 1.4;
+}
+
+/* =============================
+   MOBILE REFINEMENTS – TOP CARD
+   ============================= */
+@media (max-width: 600px) {
+  .card.layered-soft {
+    padding: 20px 18px;
+    margin: 16px 0;
+  }
+
+  .card h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .downloads .btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
 }

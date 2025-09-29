@@ -149,7 +149,8 @@ h3 {
 /* ===========================
    6. EYEBROW LABELS
    =========================== */
-.eyebrow {
+.eyebrow,
+.eyebrow-badge {
   display: inline-block;
   background: #e6edf5;
   color: var(--task-500);
@@ -162,20 +163,49 @@ h3 {
   margin-bottom: 10px;
   box-shadow: inset 0 1px 2px rgba(255,255,255,0.6),
               0 1px 2px rgba(0,0,0,0.1);
+
+  /* 🔥 fade-in animation */
+  opacity: 0;
+  animation: eyebrowFadeIn 0.6s ease-out forwards;
 }
-.eyebrow-badge {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--task-400), var(--task-500));
-  color: #fff;
-  font-weight: 900;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+
+/* Stagger effect */
+.eyebrow:nth-of-type(1),
+.eyebrow-badge:nth-of-type(1) { animation-delay: 0.1s; }
+.eyebrow:nth-of-type(2),
+.eyebrow-badge:nth-of-type(2) { animation-delay: 0.3s; }
+.eyebrow:nth-of-type(3),
+.eyebrow-badge:nth-of-type(3) { animation-delay: 0.5s; }
+.eyebrow:nth-of-type(4),
+.eyebrow-badge:nth-of-type(4) { animation-delay: 0.7s; }
+/* Add more if needed */
+
+@keyframes eyebrowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* ===========================
+   MOBILE REFINEMENTS
+   =========================== */
+@media (max-width: 600px) {
+  .eyebrow,
+  .eyebrow-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    margin: 4px 0 6px 4px;   /* ✅ top + left padding */
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+  }
+}
+
+
 
 
 /* ===========================
@@ -308,81 +338,110 @@ h3 {
 
 
 /* ===========================
-   ADDRESS BAND (Gap Fix)
+   ADDRESS BAND (Refined + Centered Button on Mobile)
    =========================== */
 .address-band {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding: 14px 20px;
+  gap: 18px;
+  padding: 18px 22px;
   margin-top: 28px;
 
-  background: linear-gradient(180deg,#f7f9fb 0%, #e9edf0 100%);
+  background: linear-gradient(180deg, #fdfdfd 0%, #f3f6f9 100%);
   border-radius: var(--radius-lg);
   border: 1px solid #c7ced6;
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow-2);
   position: relative;
   flex-wrap: wrap;
 }
+
+/* Subtle layered backdrop */
 .address-band::before {
   content: "";
   position: absolute;
-  top: 8px; left: 8px; right: -8px; bottom: -8px;
-  background: #d0d4da;
+  top: 10px;
+  left: 10px;
+  right: -10px;
+  bottom: -10px;
+  background: #d7dbe0;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-2);
-  border: 1px solid #b0b8c0;
+  box-shadow: var(--shadow-3);
+  border: 1px solid #b8c0c8;
   z-index: -1;
 }
 
-/* Left group: icon + text inline */
+/* Left group: icon + text */
 .addr-left {
   display: flex;
-  align-items: center;   /* ✅ centers vertically with icon */
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
   flex: 1 1 auto;
 }
 
-/* Icon */
+/* Icon bubble */
 .addr-icon {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
   fill: #fff;
   background: var(--task-400);
   border-radius: 50%;
-  padding: 4px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-1);
 }
 
-/* Text stays inline-block, no vertical stacking */
+/* Address text */
 .addr-text {
-  display: inline-block;  /* ✅ removes column stacking */
-  line-height: 1.2;       /* ✅ tighter line spacing */
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
 }
-.address-band strong {
+.addr-text strong {
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--ink);
-  margin-right: 6px;      /* ✅ spacing between name + address */
+  margin-bottom: 2px;
 }
-.address-band .muted {
-  font-size: 0.85rem;
+.addr-text .muted {
+  font-size: 0.9rem;
   color: var(--muted);
-  display: inline;        /* ✅ keep address on same line */
 }
 
-/* Button */
+/* Phone button */
 .address-band .btn.small {
-  padding: 7px 14px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  white-space: nowrap;
-  flex: 0 0 auto;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: 10px;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, var(--task-400), var(--task-500));
+  box-shadow: var(--shadow-2);
+}
+.address-band .btn.small:hover {
+  background: linear-gradient(90deg, var(--task-500), var(--task-400));
 }
 
+/* ===========================
+   MOBILE LAYOUT
+   =========================== */
+@media (max-width: 600px) {
+  .address-band {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+  }
+
+  /* Force button into its own row + centered */
+  .address-band .btn.small {
+    align-self: center;   /* ✅ centers horizontally */
+    width: auto;
+    min-width: 220px;     /* consistent size */
+    text-align: center;
+  }
+}
 
