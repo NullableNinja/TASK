@@ -1,0 +1,165 @@
+/* ============================================================
+   NEWS.CSS — PAGE-SPECIFIC STYLES (HI-YAH! STYLE)
+   ------------------------------------------------------------
+   Extends base.css + partial styles
+   Scope: Newsletter archive + Blog feed
+============================================================ */
+
+/* ======================
+   Archive (taped panel)
+====================== */
+.taped-card.archive-controls {
+  background: #f7f9fb;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.taped-card.archive-controls .row-split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.taped-card.archive-controls label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.taped-card.archive-controls select {
+  min-width: 160px;
+  padding: 8px 12px;
+  border: 1px solid #c7ced6;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  background: #fff;
+  box-shadow: var(--shadow-1) inset;
+}
+
+.taped-card.archive-controls .cta-row {
+  margin-left: auto;
+}
+
+.taped-card.archive-controls .hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+
+/* ======================
+   Blog Feed
+====================== */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0 24px;
+}
+
+.filters input[type="search"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #c7ced6;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-1) inset;
+}
+
+.filters input[type="search"]:focus {
+  border-color: var(--task-400);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(31,94,161,0.25);
+}
+
+/* Tags */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-row .tag {
+  background: #e5e8ec;
+  border: 1px solid #c7ced6;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.tag-row .tag:hover {
+  background: #d0d4da;
+  transform: translateY(-2px);
+}
+
+.tag-row .tag.active {
+  background: linear-gradient(90deg, var(--task-400), var(--task-500));
+  color: #fff;
+  border: none;
+}
+
+/* Posts */
+.post.card {
+  margin-bottom: 28px;
+  padding: 20px;
+}
+
+.post .post-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.post .meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.post .hero {
+  margin: 12px 0;
+}
+
+.post .hero img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.post .summary {
+  font-size: 1rem;
+  color: var(--ink);
+  margin: 8px 0 14px;
+}
+
+.post .body {
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-top: 12px;
+}
+
+.post .pin {
+  margin-left: 6px;
+  font-size: 1rem;
+  color: var(--task-400);
+}
+
+/* Load more */
+.loadmore-row {
+  text-align: center;
+  margin-top: 20px;
+}

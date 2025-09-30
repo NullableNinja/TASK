@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Title & SEO -->
+  <title>Task Karate – News & Archive</title>
+  <meta name="description"
+        content="Latest updates, blog posts, and newsletter archive from Task Karate School in La Crosse, WI."/>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet"/>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
+
+  <!-- Page-Specific Styles -->
+  <link rel="stylesheet" href="assets/styles/news.css"/>
+</head>
+
+<body>
+  <!-- Decorative Background -->
+  <div class="bg-geo" aria-hidden="true"></div>
+
+  <!-- Header Partial -->
+  <div id="site-header"></div>
+
+  <!-- ======================
+       MAIN CONTENT
+  ======================= -->
+  <main id="page-start" class="container">
+
+    <!-- ======================
+         Newsletter Archive
+    ======================= -->
+    <section id="archive" class="stack-soft">
+      <!-- Header block -->
+      <div class="card layered-soft">
+        <span class="eyebrow">Archive</span>
+        <h1>Past Newsletters</h1>
+        <p class="muted">
+          Pick a year and month to download a PDF newsletter.  
+          If a month isn’t listed, we didn’t publish one (we were probably kicking pads).
+        </p>
+      </div>
+
+      <!-- Taped archive controls -->
+      <div class="taped-connection">
+        <div class="taped-card archive-controls">
+          <div class="row-split">
+            <div>
+              <label for="yearSel">Year</label>
+              <select id="yearSel" aria-label="Select year"></select>
+            </div>
+            <div>
+              <label for="monthSel">Month</label>
+              <select id="monthSel" aria-label="Select month"></select>
+            </div>
+            <div class="cta-row">
+              <a id="dlBtn" class="btn navy square" href="#" target="_blank" rel="noopener" download>
+                Download PDF
+              </a>
+            </div>
+          </div>
+          <span class="hint" id="noFile" hidden>No file for that selection.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================
+         Blog / Updates
+    ======================= -->
+    <section id="blog" class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Blog</span>
+        <h2>Updates from the Dojo</h2>
+        <p class="muted">
+          News, testing notes, and stories from our students.  
+          Filter by tag or search below.
+        </p>
+
+        <!-- Filters -->
+        <div class="filters">
+          <input id="search" type="search"
+                 placeholder="Search posts… (title, summary, body, tags)"
+                 aria-label="Search posts"/>
+          <div id="tagRow" class="tag-row" role="group" aria-label="Filter by tag"></div>
+        </div>
+
+        <!-- Feed -->
+        <div id="feed"></div>
+
+        <!-- Load More -->
+        <div class="loadmore-row">
+          <button id="loadMore" class="btn steel square small" hidden>Load more</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================
+         Address Band
+    ======================= -->
+    <section class="stack-soft">
+      <div class="address-band">
+        <div class="addr-left">
+          <svg class="addr-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0Z"/>
+            <path d="M12 7v5l3 3"/>
+          </svg>
+          <div>
+            <strong>Task Karate School</strong><br/>
+            <span class="muted">1501 St. Andrew Street, Suite 212 • La Crosse, WI 54603</span>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a class="btn navy square small" href="tel:+16087818275">(608) 781-TASK (8275)</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Partial -->
+  <div id="site-footer"></div>
+
+  <!-- Scroll Indicator -->
+  <div id="scroll-indicator"></div>
+
+  <!-- Return to Top -->
+  <button id="toTopBtn" aria-label="Return to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="assets/scripts/partials.js"></script>
+  <script>mountPartials();</script>
+  <script src="assets/scripts/base.js"></script>
+  <script src="assets/scripts/news.js"></script>
+  <script src="assets/scripts/index.js"></script> <!-- scroll indicator + toTop -->
+  <script src="assets/scripts/partials/navigation-bar.js"></script>
+</body>
+</html>
