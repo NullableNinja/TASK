@@ -3,7 +3,7 @@
 <head>
   <!-- ===========================
        META & BASIC CONFIG
-       =========================== -->
+  ============================ -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -17,20 +17,20 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"/>
 
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="assets/styles/base.css">
-  <link rel="stylesheet" href="assets/styles/schedule.css">
-  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css">
-  <link rel="stylesheet" href="assets/styles/partials/footer.css">
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/schedule.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
 </head>
 
 <body>
   <!-- Decorative Background -->
   <div class="bg-geo" aria-hidden="true"></div>
 
-  <!-- Header (partial from ROOT/partials/navigation-bar.html) -->
+  <!-- Header Partial -->
   <div id="site-header"></div>
 
   <!-- =====================
@@ -38,8 +38,16 @@
   ====================== -->
   <main id="page-start" class="container">
 
-    <!-- Intro / downloads -->
-    <section class="stack-soft">
+    <!-- =============================
+         Schedules + Guidelines (Taped)
+         -----------------------------
+         - Top schedules header block
+         - PDF download buttons with shadow
+         - "How These Schedules Work" taped panel
+    ============================== -->
+    <section id="schedules" class="stack-soft">
+      
+      <!-- Header block -->
       <div class="card layered-soft">
         <span class="eyebrow">La Crosse, Wisconsin</span>
         <h1>Schedules</h1>
@@ -48,25 +56,32 @@
           Call us—we’ll point you to the right class.
         </p>
         <div class="downloads">
-          <a class="btn square" href="../files/task-schedule-kids.pdf" download>Download Kids PDF</a>
-          <a class="btn navy square" href="../files/task-schedule-teens-adults.pdf" download>Download Teens &amp; Adults PDF</a>
+          <a class="btn square" href="../files/task-schedule-kids.pdf" download>
+            Download Kids PDF
+          </a>
+          <a class="btn navy square" href="../files/task-schedule-teens-adults.pdf" download>
+            Download Teens &amp; Adults PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- Guidelines taped below -->
+      <div class="taped-connection guidelines">
+        <div class="taped-card guidelines">
+          <h3>How These Schedules Work</h3>
+          <ul>
+            <li>All classes are 45 minutes unless marked with an asterisk (*).</li>
+            <li>Mat Class focuses on groundwork/grappling skills.</li>
+            <li>Sparring Class — <strong>gear required</strong>. Ask if you’re unsure.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Global notes -->
-    <section class="stack-soft">
-      <div class="card layered-soft">
-        <span class="eyebrow">How these schedules work</span>
-        <ul class="muted list-tight">
-          <li>All classes are 45 minutes unless marked with an asterisk (*).</li>
-          <li>Mat Class focuses on groundwork/grappling skills.</li>
-          <li>Sparring Class — <strong>gear required</strong>. Ask if you’re unsure.</li>
-        </ul>
-      </div>
-    </section>
 
-    <!-- Kids -->
+    <!-- =============================
+         Kids Schedule
+    ============================== -->
     <section id="kids" class="stack-soft">
       <div class="card layered-off">
         <h2>Kids</h2>
@@ -85,7 +100,9 @@
       </div>
     </section>
 
-    <!-- Teens & Adults -->
+    <!-- =============================
+         Teens & Adults Schedule
+    ============================== -->
     <section id="adults" class="stack-soft">
       <div class="card layered-off">
         <h2>Teens &amp; Adults</h2>
@@ -101,7 +118,9 @@
       </div>
     </section>
 
-    <!-- Eskrima -->
+    <!-- =============================
+         Eskrima Schedule
+    ============================== -->
     <section id="eskrima" class="stack-soft">
       <div class="card layered-off">
         <h2>IS3 • Eskrima</h2>
@@ -120,7 +139,9 @@
       </div>
     </section>
 
-    <!-- Testing -->
+    <!-- =============================
+         Testing Schedule
+    ============================== -->
     <section id="testing" class="stack-soft">
       <div class="card layered-off">
         <h2>Testing</h2>
@@ -138,32 +159,49 @@
       </div>
     </section>
 	
-	<!-- Address band -->
-	<div class="address-band card layered-soft">
-	<div class="addr-left">
-		<svg class="addr-icon" viewBox="0 0 24 24" aria-hidden="true">
-		<path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0Z"/>
-		<path d="M12 7v5l3 3"/>
-		</svg>
-		<div class="addr-text">
-			<strong>Task Karate School</strong>
-			<span class="muted">1501 St. Andrew Street, Suite 212 • La Crosse, WI 54603</span>
-		</div>
-
-	</div>
-	<div>
-		<a class="btn navy square small" href="tel:+16087818275">(608) 781-TASK (8275)</a>
-	</div>
-	</div>
+    <!-- =============================
+         Address Band
+    ============================== -->
+    <section class="stack-soft">
+      <div class="address-band">
+        <div class="addr-left">
+          <svg class="addr-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0Z"/>
+            <path d="M12 7v5l3 3"/>
+          </svg>
+          <div>
+            <strong>Task Karate School</strong><br/>
+            <span class="muted">1501 St. Andrew Street, Suite 212 • La Crosse, WI 54603</span>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a class="btn navy square small" href="tel:+16087818275">(608) 781-TASK (8275)</a>
+        </div>
+      </div>
+    </section>
+	
   </main>
 
-  <!-- Footer (partial from ROOT/partials/footer.html) -->
+  <!-- Footer Partial -->
   <div id="site-footer"></div>
+
+  <!-- Scroll Indicator -->
+  <div id="scroll-indicator"></div>
+
+  <!-- Return to Top -->
+  <button id="toTopBtn" aria-label="Return to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 
   <!-- JavaScript -->
   <script src="assets/scripts/partials.js"></script>
   <script src="assets/scripts/base.js"></script>
   <script src="assets/scripts/schedule.js"></script>
+  <script src="assets/scripts/index.js"></script> <!-- ✅ ensures scroll indicator & toTop work -->
   <script src="assets/scripts/partials/navigation-bar.js"></script>
 </body>
 </html>

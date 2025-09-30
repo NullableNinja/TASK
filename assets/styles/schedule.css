@@ -1,9 +1,20 @@
-/* =============================
-   schedule.css
-   Dedicated styles for schedule tables
-   Includes fixed Program column,
-   equal-width day columns, and sticky Program column
-============================= */
+/* ============================================================
+   SCHEDULE.CSS — HI-YAH! STYLE
+   ------------------------------------------------------------
+   Purpose:
+   - Dedicated styles for schedule.html
+   - Handles tables, download buttons, and guideline sections
+   - Reinforces Paper-Fu / dojo aesthetic
+============================================================ */
+
+
+/* ============================================================
+   1. SCHEDULE TABLES
+   ------------------------------------------------------------
+   - Scrollable wrapper
+   - Fixed program column
+   - Sticky table headers
+============================================================ */
 
 .table-scroller {
   overflow-x: auto;
@@ -14,18 +25,18 @@
   margin-top: 12px;
 }
 
-/* Tables */
+/* Table core */
 .table-scroller table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  min-width: 640px; /* ✅ smaller min width to reduce empty scroll space */
+  min-width: 640px; /* smaller min width to reduce empty scroll */
   table-layout: fixed;
   font-size: 0.95rem;
   color: var(--ink);
 }
 
-/* Headings */
+/* Table headers */
 .table-scroller thead th {
   position: sticky;
   top: 0;
@@ -40,10 +51,10 @@
   z-index: 1;
 }
 
-/* Program column — narrower */
+/* Program column */
 .table-scroller th:first-child,
 .table-scroller td:first-child {
-  width: 140px;          /* ✅ reduced from 200px */
+  width: 140px;       /* reduced from 200px */
   min-width: 120px;
   max-width: 160px;
   text-align: left;
@@ -60,21 +71,28 @@
   color: var(--task-500);
 }
 
-/* Day columns — auto-adjusted */
+/* Day columns (Mon–Sat) */
 .table-scroller th:not(:first-child),
 .table-scroller td:not(:first-child) {
-  width: calc((100% - 140px) / 6); /* ✅ more room now for Mon–Sat */
+  width: calc((100% - 140px) / 6);
   text-align: center;
 }
 
-/* Table body cells */
+/* Body cells */
 .table-scroller td {
   padding: 10px 14px;
   border-bottom: 1px solid #e2e8f0;
   vertical-align: middle;
 }
 
-/* Time “pill” styling */
+
+/* ============================================================
+   2. TIME PILL STYLES
+   ------------------------------------------------------------
+   - Rounded labels for times
+   - Flex stack for multiple times
+============================================================ */
+
 .time {
   display: inline-block;
   background: #e6edf5;
@@ -88,7 +106,7 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Multiple stacked pills */
+/* Stack multiple times vertically */
 .tstack {
   display: flex;
   flex-direction: column;
@@ -96,7 +114,13 @@
   align-items: center;
 }
 
-/* Legend */
+
+/* ============================================================
+   3. LEGEND TEXT
+   ------------------------------------------------------------
+   - Small helper notes under each table
+============================================================ */
+
 .legend {
   font-size: 0.85rem;
   color: var(--muted);
@@ -104,9 +128,151 @@
   line-height: 1.4;
 }
 
-/* =============================
-   MOBILE REFINEMENTS – TOP CARD
-   ============================= */
+
+/* ============================================================
+   4. DOWNLOAD BUTTONS — HI-YAH! STYLE
+   ------------------------------------------------------------
+   - Top PDF buttons styled like belts (layered shadow + hover)
+============================================================ */
+
+.downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.downloads .btn {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: 0.95rem;
+  text-align: center;
+  border-radius: 10px;
+  padding: 14px 22px;
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.30);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Layered shadow tile */
+.downloads .btn::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.20);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+}
+
+/* Hover & Active */
+.downloads .btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+.downloads .btn:hover::after {
+  opacity: 0.35;
+}
+.downloads .btn:active {
+  transform: scale(0.96);
+}
+
+/* Kill global blue hover override */
+.downloads .btn:hover,
+.downloads .btn:focus,
+.downloads .btn:active {
+  background: inherit;
+  color: inherit;
+  filter: brightness(1.05);
+}
+
+
+/* ============================================================
+   5. TAPED CONNECTION — GUIDELINES
+   ------------------------------------------------------------
+   - Attaches HOW THESE SCHEDULES WORK under Schedules
+   - Blends Students style (tape) with Dojo Rules (boxed list)
+============================================================ */
+
+.taped-connection.guidelines {
+  margin-top: -20px; /* pull closer to Schedules */
+  position: relative;
+  z-index: 5;
+}
+
+.taped-card.guidelines {
+  background: #f7f9fb;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  padding: 18px 22px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Vertical tape strips */
+.taped-card.guidelines::before,
+.taped-card.guidelines::after {
+  content: "";
+  position: absolute;
+  top: -26px;
+  width: 26px;
+  height: 54px;
+  background: rgba(17,17,17,0.85); /* semi-translucent black */
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  z-index: 20;
+}
+.taped-card.guidelines::before { left: 32px; transform: rotate(-4deg); }
+.taped-card.guidelines::after  { right: 32px; transform: rotate(4deg); }
+
+/* Headings inside */
+.taped-card.guidelines h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--task-500);
+  margin-bottom: 14px;
+  position: relative;
+  display: inline-block;
+}
+.taped-card.guidelines h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 5px;
+  background: var(--task-400);
+  transform: skew(-10deg);
+}
+
+/* Bullet list inside */
+.taped-card.guidelines ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.taped-card.guidelines li {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  color: var(--ink);
+}
+
+
+/* ============================================================
+   6. MOBILE REFINEMENTS
+   ------------------------------------------------------------
+   - Compress padding & font sizes
+   - Stack download buttons vertically
+============================================================ */
+
 @media (max-width: 600px) {
   .card.layered-soft {
     padding: 20px 18px;
