@@ -163,3 +163,25 @@
   text-align: center;
   margin-top: 20px;
 }
+
+/* ============================================================
+   FACEBOOK FEED PANEL — Paper-Fu styling
+============================================================ */
+.fb-feed-wrap h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.fb-embed {
+  border-radius: var(--radius-lg);
+  overflow: hidden; /* round the FB iframe edges */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  background: #fff;
+  padding: 8px; /* breathing room around the iframe */
+}
+
+.fb-embed iframe {
+  border-radius: var(--radius-md);
+}
