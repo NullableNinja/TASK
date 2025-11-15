@@ -574,3 +574,17 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+/* ===========================
+   STUDENT LOGOUT
+   =========================== */
+window.logoutStudent = function() {
+  if (confirm('Are you sure you want to log out?')) {
+    // Clear session
+    sessionStorage.removeItem('studentLoggedIn');
+    sessionStorage.removeItem('loggedInStudentId');
+    sessionStorage.removeItem('loggedInStudentName');
+    
+    // Redirect to login
+    window.location.href = 'student-login.html';
+  }
+};

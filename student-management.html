@@ -308,6 +308,17 @@
           
           <!-- Notes -->
           <div class="form-section">
+          <!-- Student PIN -->
+          <div class="form-section">
+            <h3>🔐 Student PIN</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 16px;">Set a 4-digit PIN for student dashboard access</p>
+            <div>
+              <label for="studentPin">4-Digit PIN</label>
+              <input type="password" id="studentPin" maxlength="4" pattern="[0-9]{4}" placeholder="Enter 4-digit PIN" inputmode="numeric"/>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 8px;">Students will use this PIN to log into their dashboard</p>
+            </div>
+          </div>
+          
             <h3>📝 Notes</h3>
             <textarea id="studentNotes" rows="4" placeholder="Any special notes about the student..."></textarea>
           </div>

@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('studentUniformSize').value = student.uniformSize || '';
     document.getElementById('studentJoinDate').value = student.joinDate;
     document.getElementById('studentProgram').value = student.program;
+    document.getElementById('studentPin').value = student.pin || '';
     document.getElementById('studentNotes').value = student.notes || '';
     
     // Load tags
@@ -220,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
       joinDate: document.getElementById('studentJoinDate').value,
       program: document.getElementById('studentProgram').value,
       tags: window.currentStudentTags || [],
+      pin: document.getElementById('studentPin').value.trim(),
       notes: document.getElementById('studentNotes').value.trim()
     };
   }

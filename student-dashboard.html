@@ -24,6 +24,18 @@
   <link rel="stylesheet" href="assets/styles/student-dashboard.css"/>
 </head>
 <body>
+  <!-- Authentication Check -->
+  <script>
+    // Check if student is logged in
+    const isLoggedIn = sessionStorage.getItem('studentLoggedIn');
+    const loggedInStudentId = sessionStorage.getItem('loggedInStudentId');
+    
+    // If not logged in, redirect to login page
+    if (!isLoggedIn || !loggedInStudentId) {
+      window.location.href = 'student-login.html';
+    }
+  </script>
+  
   <!-- Background -->
   <div class="bg-geo" aria-hidden="true"></div>
   
@@ -68,6 +80,12 @@
           <div class="quick-actions">
             <button class="btn navy square" onclick="markAttendance()">
               <i class="fas fa-check-circle"></i> Mark Today's Class
+            </button>
+            <button class="btn square" onclick="logoutStudent()" style="background: rgba(255,255,255,0.1);">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; fill: currentColor;">
+                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+              </svg>
+              Logout
             </button>
           </div>
         </div>
