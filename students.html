@@ -12,7 +12,8 @@
 
   <!-- Shared Styles -->
   <link rel="stylesheet" href="assets/styles/base.css"/>
-  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar-modern.css"/>
+  <link rel="stylesheet" href="assets/styles/universal-enhancements.css"/>
   <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
 
   <!-- Page-Specific Styles -->
@@ -38,6 +39,27 @@
           Quick downloads for testing requirements and a new student form.
           If you’re unsure where to start, ask — we’re happy to help.
         </p>
+      <!-- Quick Links -->
+        <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+          <a href="./student-dashboard.html" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; fill: currentColor;">
+              <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+            </svg>
+            My Dashboard
+          </a>
+          <a href="./student-management.html" class="btn navy" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; fill: currentColor;">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            Student Management
+          </a>
+          <a href="./technique-library.html" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; fill: currentColor;">
+              <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+            </svg>
+            Technique Library
+          </a>
+        </div>
       </div>
       
       <!-- New Student Form (taped below header) -->
@@ -164,9 +186,7 @@
 
   <!-- Scripts -->
   <script src="assets/scripts/partials.js"></script>
-  <script>mountPartials();</script>
   <script src="assets/scripts/base.js"></script>
   <script src="assets/scripts/index.js"></script>
-  <script src="assets/scripts/partials/navigation-bar.js"></script>
 </body>
 </html>

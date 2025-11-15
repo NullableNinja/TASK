@@ -34,13 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error(`❌ Error loading partial: ${resolved}`, err));
   }
 
-  // Load navigation bar
-  loadPartial("partials/navigation-bar.html", "site-header", () => {
-    const navScript = document.createElement("script");
-    navScript.src = resolvePath("assets/scripts/partials/navigation-bar.js");
-    navScript.defer = true;
-    document.body.appendChild(navScript);
-    console.log("🔄 Navigation bar script re-injected");
+  // Load navigation bar (modern version)
+  loadPartial("partials/navigation-bar-v2.html", "site-header", () => {
+    console.log("✅ Modern navigation bar loaded");
   });
 
   // Load footer
