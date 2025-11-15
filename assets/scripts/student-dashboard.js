@@ -11,40 +11,65 @@
 document.addEventListener('DOMContentLoaded', () => {
   
   /* ===========================
-     STUDENT DATA MODEL
+     LOAD DYNAMIC STUDENT DATA
   =========================== */
-  const studentData = {
-    name: 'Alex Johnson',
-    avatar: 'images/staff/RandyThomson.png',
-    currentBelt: 'orange',
-    trainingDuration: 18,
-    currentStreak: 12,
-    stats: {
-      classesAttended: 47,
-      practiceHours: 124,
-      techniquesLearned: 28,
-      tournamentsWon: 3
-    },
-    attendance: generateMockAttendance(),
-    achievements: [
-      { id: 'first-steps', earned: true, progress: 100 },
-      { id: 'dedicated-student', earned: true, progress: 100 },
-      { id: 'perfect-attendance', earned: false, progress: 85 },
-      { id: 'technique-master', earned: true, progress: 100 },
-      { id: 'tournament-champion', earned: false, progress: 60 },
-      { id: 'black-belt-journey', earned: false, progress: 35 }
-    ],
-    techniques: [
-      { id: 'front-punch', name: 'Front Punch', status: 'learned', icon: '👊' },
-      { id: 'low-block', name: 'Low Block', status: 'in-progress', icon: '🛡️' },
-      { id: 'front-kick', name: 'Front Kick', status: 'locked', icon: '🦵' }
-    ]
-  };
+  // Get selected student ID
+  const studentId = window.StudentSelector.getSelectedStudentId();
+  
+  // Load student data
+  let studentData = window.StudentSelector.loadStudentById(studentId);
+  
+  // Calculate training duration
+  if (studentData.dateJoined) {
+    studentData.trainingDuration = window.StudentSelector.calculateTrainingDuration(studentData.dateJoined);
+  } else {
+    studentData.trainingDuration = 18; // Default
+  }
+  
+  // Ensure stats exist
+  if (!studentData.stats) {
+    studentData.stats = {
+      classesAttended: 0,
+      practiceHours: 0,
+      techniquesLearned: 0,
+      tournamentsWon: 0,
+      currentStreak: 0
+    };
+  }
+  
+  // Ensure attendance exists
+  if (!studentData.attendance || studentData.attendance.length === 0) {
+    studentData.attendance = generateMockAttendance();
+  }
+  
+  // Ensure achievements exist
+  if (!studentData.achievements) {
+    studentData.achievements = [
+      { id: 'first-steps', name: 'First Steps', earned: true, progress: 100, icon: '🥋' },
+      { id: 'dedicated-student', name: 'Dedicated Student', earned: true, progress: 100, icon: '⭐' },
+      { id: 'perfect-attendance', name: 'Perfect Attendance', earned: false, progress: 85, icon: '📅' },
+      { id: 'technique-master', name: 'Technique Master', earned: true, progress: 100, icon: '🎯' },
+      { id: 'tournament-champion', name: 'Tournament Champion', earned: false, progress: 60, icon: '🏆' },
+      { id: 'black-belt-journey', name: 'Black Belt Journey', earned: false, progress: 35, icon: '🥇' }
+    ];
+  }
+  
+  // Ensure techniques exist
+  if (!studentData.techniques) {
+    studentData.techniques = [
+      { id: 'front-punch', name: 'Front Punch', status: 'learned', category: 'strikes' },
+      { id: 'low-block', name: 'Low Block', status: 'in-progress', category: 'blocks' },
+      { id: 'front-kick', name: 'Front Kick', status: 'locked', category: 'kicks' }
+    ];
+  }
   
   /* ===========================
      INITIALIZATION
   =========================== */
   function initialize() {
+    // Initialize student selector dropdown
+    window.StudentSelector.initializeStudentSelector();
+    
     loadStudentData();
     renderAttendanceCalendar();
     checkMilestones();
