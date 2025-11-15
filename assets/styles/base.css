@@ -11,8 +11,8 @@
    1. DESIGN TOKENS
    =========================== */
 :root {
-  --ink: #0E2430;
-  --muted: #557086;
+  --ink: #ffffff;
+  --muted: rgba(255, 255, 255, 0.8);
 
   --task-400: #1F5EA1;  /* Primary TASK blue */
   --task-500: #173E68;  /* Darker TASK blue */
@@ -121,14 +121,22 @@ h3 {
    Double-layered cards with shadows
    =========================== */
 .card {
-  background: linear-gradient(180deg,#f0f2f5 0%, #e2e6ea 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
   padding: 28px;
   position: relative;
-  box-shadow: var(--shadow-2), inset 0 1px 3px rgba(255,255,255,0.5);
-  border: 1px solid #c7ced6;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   z-index: 1;
-  color: var(--ink);
+  color: #fff;
+  transition: all 0.3s ease;
 }
 .card::before {
   content: "";
@@ -152,8 +160,8 @@ h3 {
 .eyebrow,
 .eyebrow-badge {
   display: inline-block;
-  background: #e6edf5;
-  color: var(--task-500);
+  background: rgba(31, 94, 161, 0.2);
+  color: var(--task-400);
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
@@ -303,34 +311,41 @@ h3 {
   bottom: 20px;
   left: 20px;
   z-index: 9999;
-  background: var(--task-500);
+  background: linear-gradient(135deg, var(--task-400), var(--task-500));
   color: #fff;
-  border: none;
-  border-radius: 16px;
-  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-2);
+  box-shadow: 
+    0 4px 12px rgba(31, 94, 161, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
 }
-#toTopBtn svg { width: 22px; height: 22px; stroke: #fff; }
-#toTopBtn::after {
-  content: "";
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 22px;
-  height: 22px;
-  background: var(--task-400);
-  border-radius: 50%;
-  box-shadow: var(--shadow-2);
-  z-index: -1;
+#toTopBtn svg { 
+  width: 24px; 
+  height: 24px; 
+  stroke: #fff;
+  stroke-width: 3;
 }
-#toTopBtn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+#toTopBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 20px rgba(31, 94, 161, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+#toTopBtn.show { 
+  opacity: 1; 
+  pointer-events: auto; 
+}
 
 
 /* ===========================

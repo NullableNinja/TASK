@@ -103,19 +103,18 @@ a:not(.btn):not(.contact-tile):not(.tool-card):hover {
   color: var(--task-500);
 }
 
-/* Enhanced eyebrow styling */
+/* Enhanced eyebrow styling - subtle and clean */
 .eyebrow {
   display: inline-block;
-  padding: 6px 16px;
-  background: linear-gradient(135deg, var(--task-400), var(--task-500));
-  color: #fff;
+  padding: 4px 12px;
+  background: rgba(31, 94, 161, 0.2);
+  color: var(--task-400);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(31, 94, 161, 0.4);
-  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+  border-radius: 6px;
+  margin-bottom: 12px;
 }
 
 /* Enhanced section headings */

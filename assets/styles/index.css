@@ -274,20 +274,56 @@
   z-index: 1500;
 }
 
-/* FAB button */
-.fab button {
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  font-weight: 800;
-  font-size: 0.9rem;
+/* Contact FAB button - Paper-Fu style */
+.contact-fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
   background: linear-gradient(135deg, var(--task-400), var(--task-500));
-  box-shadow: 0 6px 16px rgba(0,0,0,.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: 
+    0 6px 20px rgba(31, 94, 161, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
 }
-.fab button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+
+.contact-fab-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.contact-fab-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 10px 30px rgba(31, 94, 161, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.contact-fab-btn:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Mobile: Show icon only */
+@media (max-width: 768px) {
+  .contact-fab-btn {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  
+  .fab-label {
+    display: none;
+  }
 }
 
 /* Contact panel */
