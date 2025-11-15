@@ -1,0 +1,357 @@
+/* ============================================================
+   ENHANCED CONTACT SECTION - Paper-Fu Style
+   ------------------------------------------------------------
+   Purpose:
+   - Modern contact tiles with SVG icons
+   - Enhanced contact form with validation
+   - Improved visual hierarchy
+============================================================ */
+
+/* ===========================
+   CONTACT TILES
+   =========================== */
+.contact-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.contact-tile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(31, 94, 161, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.contact-tile:hover::before {
+  left: 100%;
+}
+
+.contact-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(31, 94, 161, 0.4);
+  box-shadow: 
+    0 8px 24px rgba(31, 94, 161, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.contact-tile .tile-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--task-400), var(--task-500));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(31, 94, 161, 0.4);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.contact-tile:hover .tile-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.contact-tile .tile-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+
+.contact-tile .tile-text {
+  flex: 1;
+}
+
+.contact-tile .tile-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact-tile .tile-sub {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ===========================
+   ENHANCED CONTACT PANEL
+   =========================== */
+.panel {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 360px;
+  background: linear-gradient(
+    135deg,
+    rgba(31, 94, 161, 0.15) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(31, 94, 161, 0.3);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  padding: 28px;
+  display: none;
+  z-index: 2000;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.panel h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0 0 20px;
+  color: var(--task-500);
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.panel label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--task-500);
+  margin: 14px 0 6px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.panel input,
+.panel textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(31, 94, 161, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--task-500);
+  transition: all 0.3s ease;
+}
+
+.panel input:focus,
+.panel textarea:focus {
+  border-color: var(--task-400);
+  background: #fff;
+  box-shadow: 
+    0 0 0 3px rgba(31, 94, 161, 0.15),
+    0 4px 12px rgba(31, 94, 161, 0.2);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.panel textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.panel .send {
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, var(--task-400), var(--task-500));
+  color: #fff;
+  box-shadow: 
+    0 6px 20px rgba(31, 94, 161, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel .send::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.panel .send:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.panel .send:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 30px rgba(31, 94, 161, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.panel .send:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.panel .note {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--task-500);
+  text-align: center;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+/* Success/Error Messages */
+.panel .message {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+.panel .message.success {
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: #2E7D32;
+}
+
+.panel .message.error {
+  background: rgba(244, 67, 54, 0.15);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #C62828;
+}
+
+.panel .message.show {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   FAB BUTTON
+   =========================== */
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1999;
+}
+
+.fab button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--task-400), var(--task-500));
+  border: none;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 24px rgba(31, 94, 161, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab button:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 
+    0 12px 32px rgba(31, 94, 161, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.fab button:active {
+  transform: scale(0.95);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+@media (max-width: 768px) {
+  .contact-tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    width: calc(100% - 40px);
+    right: 20px;
+    left: 20px;
+    bottom: 80px;
+  }
+
+  .fab {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .fab button {
+    width: 56px;
+    height: 56px;
+  }
+}
