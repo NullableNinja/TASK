@@ -104,6 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('studentStripes').value = '0';
     document.getElementById('studentProgram').value = 'kids';
     
+    // Clear tags
+    window.currentStudentTags = [];
+    renderStudentTags();
+    
     showModal();
   };
   
@@ -123,9 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('studentEmergency').value = student.emergencyContact || '';
     document.getElementById('studentBelt').value = student.belt;
     document.getElementById('studentStripes').value = student.stripes || '0';
+    document.getElementById('studentBeltAchievedDate').value = student.beltAchievedDate || '';
+    document.getElementById('studentBeltSize').value = student.beltSize || '';
+    document.getElementById('studentUniformSize').value = student.uniformSize || '';
     document.getElementById('studentJoinDate').value = student.joinDate;
     document.getElementById('studentProgram').value = student.program;
     document.getElementById('studentNotes').value = student.notes || '';
+    
+    // Load tags
+    window.currentStudentTags = student.tags || [];
+    renderStudentTags();
     
     toggleParentSection();
     showModal();
@@ -203,8 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
       emergencyContact: document.getElementById('studentEmergency').value.trim(),
       belt: document.getElementById('studentBelt').value,
       stripes: document.getElementById('studentStripes').value,
+      beltAchievedDate: document.getElementById('studentBeltAchievedDate').value,
+      beltSize: document.getElementById('studentBeltSize').value,
+      uniformSize: document.getElementById('studentUniformSize').value,
       joinDate: document.getElementById('studentJoinDate').value,
       program: document.getElementById('studentProgram').value,
+      tags: window.currentStudentTags || [],
       notes: document.getElementById('studentNotes').value.trim()
     };
   }
@@ -520,4 +535,61 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize the application
   initialize();
+});
+/* ===========================
+   STUDENT TAGS MANAGEMENT
+   =========================== */
+window.currentStudentTags = [];
+
+window.addStudentTag = function() {
+  const input = document.getElementById('newTagInput');
+  const tag = input.value.trim();
+  
+  if (tag && !window.currentStudentTags.includes(tag)) {
+    window.currentStudentTags.push(tag);
+    renderStudentTags();
+    input.value = '';
+  }
+};
+
+window.addPredefinedTag = function(tag) {
+  if (!window.currentStudentTags.includes(tag)) {
+    window.currentStudentTags.push(tag);
+    renderStudentTags();
+  }
+};
+
+window.removeStudentTag = function(tag) {
+  window.currentStudentTags = window.currentStudentTags.filter(t => t !== tag);
+  renderStudentTags();
+};
+
+function renderStudentTags() {
+  const display = document.getElementById('studentTagsDisplay');
+  if (!display) return;
+  
+  if (window.currentStudentTags.length === 0) {
+    display.innerHTML = '<p style="color: rgba(255,255,255,0.5); font-style: italic;">No tags added yet</p>';
+    return;
+  }
+  
+  display.innerHTML = window.currentStudentTags.map(tag => `
+    <span class="student-tag">
+      ${tag}
+      <span class="remove-tag" onclick="removeStudentTag('${tag}')">×</span>
+    </span>
+  `).join('');
+}
+
+// Allow Enter key to add tags
+document.addEventListener('DOMContentLoaded', function() {
+  const tagInput = document.getElementById('newTagInput');
+  if (tagInput) {
+    tagInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addStudentTag();
+      }
+    });
+  }
 });

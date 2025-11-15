@@ -620,3 +620,80 @@
 .student-grid::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--task-500) 0%, var(--task-400) 100%);
 }
+/* ===========================
+   STUDENT TAGS STYLING
+   =========================== */
+.tags-input-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.tags-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  margin-bottom: 12px;
+}
+
+.student-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, var(--task-400), var(--task-500));
+  color: #fff;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(31, 94, 161, 0.3);
+  transition: all 0.3s ease;
+}
+
+.student-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(31, 94, 161, 0.4);
+}
+
+.student-tag .remove-tag {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 12px;
+  transition: background 0.2s ease;
+}
+
+.student-tag .remove-tag:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tag-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-suggestion-btn {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tag-suggestion-btn:hover {
+  background: rgba(31, 94, 161, 0.3);
+  border-color: rgba(31, 94, 161, 0.5);
+  transform: translateY(-2px);
+}

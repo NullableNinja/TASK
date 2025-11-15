@@ -225,6 +225,42 @@
                 </select>
               </div>
             </div>
+              <div>
+                <label for="studentBeltAchievedDate">Belt Achieved Date</label>
+                <input type="date" id="studentBeltAchievedDate" title="Date when current belt was earned"/>
+              </div>
+              <div>
+                <label for="studentBeltSize">Belt Size</label>
+                <select id="studentBeltSize">
+                  <option value="">Select Size</option>
+                  <option value="Size 0">Size 0 (Kids 3-4)</option>
+                  <option value="Size 1">Size 1 (Kids 5-6)</option>
+                  <option value="Size 2">Size 2 (Kids 7-8)</option>
+                  <option value="Size 3">Size 3 (Kids 9-10)</option>
+                  <option value="Size 4">Size 4 (Teens/Small Adult)</option>
+                  <option value="Size 5">Size 5 (Adult Medium)</option>
+                  <option value="Size 6">Size 6 (Adult Large)</option>
+                  <option value="Size 7">Size 7 (Adult XL)</option>
+                </select>
+              </div>
+              <div>
+                <label for="studentUniformSize">Uniform Size</label>
+                <select id="studentUniformSize">
+                  <option value="">Select Size</option>
+                  <option value="Kids XS">Kids XS</option>
+                  <option value="Kids S">Kids S</option>
+                  <option value="Kids M">Kids M</option>
+                  <option value="Kids L">Kids L</option>
+                  <option value="Kids XL">Kids XL</option>
+                  <option value="Adult XS">Adult XS</option>
+                  <option value="Adult S">Adult S</option>
+                  <option value="Adult M">Adult M</option>
+                  <option value="Adult L">Adult L</option>
+                  <option value="Adult XL">Adult XL</option>
+                  <option value="Adult 2XL">Adult 2XL</option>
+                  <option value="Adult 3XL">Adult 3XL</option>
+                </select>
+              </div>
           </div>
           
           <!-- Parent Information (for kids) -->
@@ -242,6 +278,31 @@
               <div>
                 <label for="parentPhone">Parent Phone</label>
                 <input type="tel" id="parentPhone"/>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Student Tags -->
+          <div class="form-section">
+            <h3>🏷️ Student Tags</h3>
+            <div class="tags-input-container">
+              <div class="tags-display" id="studentTagsDisplay"></div>
+              <div style="display: flex; gap: 8px; margin-top: 12px;">
+                <input type="text" id="newTagInput" placeholder="Add tag (e.g., Teen/Adult, Karate Student, Active)" style="flex: 1;"/>
+                <button type="button" class="btn small" onclick="addStudentTag()">
+                  <i class="fas fa-plus"></i> Add Tag
+                </button>
+              </div>
+              <div class="tag-suggestions" style="margin-top: 12px;">
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Quick Add:</p>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Teen/Adult')">Teen/Adult</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Kids')">Kids</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Karate Student')">Karate Student</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('IS3 Student')">IS3 Student</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Active')">Active</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Competition Team')">Competition Team</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Helper')">Helper</button>
+                <button type="button" class="tag-suggestion-btn" onclick="addPredefinedTag('Assistant Instructor')">Assistant Instructor</button>
               </div>
             </div>
           </div>
