@@ -1,0 +1,496 @@
+/* ============================================================
+   TECHNIQUE ADMIN - PAPER-FU ENHANCED STYLE
+   ------------------------------------------------------------  
+   - Paper textures and tape effects
+   - Martial arts themed elements
+   - Enhanced visual hierarchy
+   - Vintage dojo aesthetic
+============================================================ */
+
+/* ===========================
+   ENHANCED PAPER-FU FOUNDATION
+   =========================== */
+.technique-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+  grid-template-areas:
+    "name japanese"
+    "category belt"
+    "difficulty icon";
+}
+
+.technique-form-grid > div:nth-child(1) { grid-area: name; }
+.technique-form-grid > div:nth-child(2) { grid-area: japanese; }
+.technique-form-grid > div:nth-child(3) { grid-area: category; }
+.technique-form-grid > div:nth-child(4) { grid-area: belt; }
+.technique-form-grid > div:nth-child(5) { grid-area: difficulty; }
+.technique-form-grid > div:nth-child(6) { grid-area: icon; }
+
+/* ===========================
+   PAPER TEXTURE ENHANCEMENTS
+   =========================== */
+.card.layered-off {
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0 0L100 100M100 0L0 100" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
+  border: 1px solid #d1d5db;
+  position: relative;
+}
+
+.card.layered-off::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 10h20M10 0v20" stroke="%23dee2e6" stroke-width="0.5"/></svg>');
+  border: 1px solid #9ca3af;
+  border-radius: calc(var(--radius-lg) + 2px);
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* ===========================
+   ENHANCED TAPE DECORATIONS
+   =========================== */
+.card.layered-soft::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  right: 30px;
+  width: 80px;
+  height: 25px;
+  background: 
+    linear-gradient(135deg, rgba(255,245,200,0.95) 0%, rgba(255,235,150,0.95) 100%),
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,69,19,0.1) 2px, rgba(139,69,19,0.1) 4px);
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 8px rgba(139,69,19,0.2);
+  z-index: 10;
+  border-left: 1px dashed rgba(139,69,19,0.3);
+  border-right: 1px dashed rgba(139,69,19,0.3);
+}
+
+.card.layered-soft::before {
+  content: '⚔️';
+  position: absolute;
+  top: -12px;
+  right: 60px;
+  font-size: 1.5rem;
+  z-index: 11;
+  transform: rotate(-10deg);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* ===========================
+   FORM ENHANCEMENTS
+   =========================== */
+.form-group {
+  margin: 24px 0;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  color: var(--task-500);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  padding-left: 24px;
+}
+
+.form-group label::before {
+  content: '🥋';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+}
+
+.input-full {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.input-full:focus {
+  outline: none;
+  border-color: var(--task-400);
+  box-shadow: 0 0 0 3px rgba(31,94,161,0.1), inset 0 2px 4px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+
+.input-full::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ===========================
+   KEY POINTS & DRILLS
+   =========================== */
+.key-point-item,
+.drill-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 12px;
+  border-left: 4px solid var(--task-400);
+  position: relative;
+  overflow: hidden;
+}
+
+.key-point-item::before,
+.drill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, transparent 50%, rgba(31,94,161,0.1) 50%);
+  transform: rotate(45deg) translate(10px, -10px);
+}
+
+.key-point-input,
+.drill-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.8);
+}
+
+.drill-level {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.8);
+  min-width: 120px;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-small.danger {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.btn-small.danger:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+  transform: scale(1.05);
+}
+
+/* ===========================
+   TECHNIQUE MANAGEMENT GRID
+   =========================== */
+.technique-filters {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.technique-filters input,
+.technique-filters select {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.9);
+}
+
+.technique-management-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.technique-management-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.technique-management-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--task-400) 0%, var(--task-500) 100%);
+}
+
+.technique-management-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.technique-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.technique-card-icon {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--task-400);
+}
+
+.technique-card-info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.technique-card-info h3 {
+  margin: 0 0 4px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.technique-card-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.technique-badges {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.technique-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.belt-badge-white { background: #f3f4f6; color: #374151; }
+.belt-badge-yellow { background: #fef3c7; color: #92400e; }
+.belt-badge-orange { background: #fed7aa; color: #9a3412; }
+.belt-badge-green { background: #dcfce7; color: #365314; }
+.belt-badge-blue { background: #dbeafe; color: #1e3a8a; }
+.belt-badge-purple { background: #e9d5ff; color: #6b21a8; }
+.belt-badge-brown { background: #fed7aa; color: #9a3412; }
+.belt-badge-black { background: #1f2937; color: #f9fafb; }
+
+.category-badge-stances { background: #e0e7ff; color: #3730a3; }
+.category-badge-strikes { background: #fee2e2; color: #991b1b; }
+.category-badge-blocks { background: #dbeafe; color: #1e40af; }
+.category-badge-kicks { background: #d1fae5; color: #065f46; }
+.category-badge-katas { background: #fef3c7; color: #92400e; }
+
+/* ===========================
+   FORM ACTIONS
+   =========================== */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 2px dashed #d1d5db;
+  flex-wrap: wrap;
+}
+
+.form-actions::before {
+  content: '✍️';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+/* ===========================
+   VIDEO UPLOAD ENHANCEMENT
+   =========================== */
+.video-upload-zone {
+  border: 3px dashed #cbd5e0;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  margin: 20px 0;
+  background: linear-gradient(135deg, #fafafa 0%, #f3f4f6 100%);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.video-upload-zone:hover {
+  border-color: var(--task-400);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(31, 94, 161, 0.1);
+}
+
+.video-upload-zone::before {
+  content: '📹';
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: bounce 2s infinite;
+}
+
+.video-preview {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-radius: 12px;
+  position: relative;
+}
+
+.video-preview::after {
+  content: '🎬';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--task-400);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(31, 94, 161, 0.3);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+@media (max-width: 768px) {
+  .technique-form-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "japanese"
+      "category"
+      "belt"
+      "difficulty"
+      "icon";
+  }
+  
+  .technique-management-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .technique-filters {
+    flex-direction: column;
+  }
+  
+  .key-point-item,
+  .drill-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .key-point-input,
+  .drill-input,
+  .drill-level {
+    width: 100%;
+  }
+}
+
+/* ===========================
+   PAPER-FU MICRO-INTERACTIONS
+   =========================== */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes paperFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(0.5deg); }
+  75% { transform: translateY(-1px) rotate(-0.5deg); }
+}
+
+.card.layered-off:hover {
+  animation: paperFloat 3s ease-in-out infinite;
+}
+
+.btn-small:not(.danger):hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(31, 94, 161, 0.2);
+}
+
+.input-full:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+}
+
+/* Enhanced scrollbar for technique cards */
+.technique-management-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.technique-management-grid::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 4px;
+}
+
+.technique-management-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--task-400) 0%, var(--task-500) 100%);
+  border-radius: 4px;
+}
+
+.technique-management-grid::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--task-500) 0%, var(--task-400) 100%);
+}

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Task Karate – Technique Library</title>
+  <meta name="description" content="Master martial arts techniques with our comprehensive video library and practice guides."/>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
+  <link rel="stylesheet" href="assets/styles/gamification.css"/>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Background -->
+  <div class="bg-geo" aria-hidden="true"></div>
+  
+  <!-- Navigation Bar Partial -->
+  <div id="site-header"></div>
+  <script>
+    fetch('partials/navigation-bar-enhanced.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-header').innerHTML = html;
+      });
+  </script>
+  
+  <!-- ===========================
+       MAIN CONTENT
+  ============================ -->
+  <main class="container">
+    
+    <!-- ===========================
+         HEADER
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-soft">
+        <span class="eyebrow">🥋 Learning Center</span>
+        <h1>Technique Library</h1>
+        <p class="muted">
+          Master your martial arts skills with our comprehensive technique library. 
+          Videos, step-by-step guides, and practice tips for all skill levels.
+        </p>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         FILTERS AND SEARCH
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+          <div style="flex: 1; min-width: 250px;">
+            <input type="search" 
+                   id="techniqueSearch" 
+                   placeholder="Search techniques..." 
+                   style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #d1d5db;"/>
+          </div>
+          <div>
+            <select id="beltFilter" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d5db;">
+              <option value="">All Belts</option>
+              <option value="white">White Belt</option>
+              <option value="yellow">Yellow Belt</option>
+              <option value="orange">Orange Belt</option>
+              <option value="green">Green Belt</option>
+              <option value="blue">Blue Belt</option>
+            </select>
+          </div>
+          <div>
+            <select id="categoryFilter" style="padding: 12px; border-radius: 8px; border: 1px solid #d1d5db;">
+              <option value="">All Categories</option>
+              <option value="stances">Stances</option>
+              <option value="strikes">Strikes</option>
+              <option value="blocks">Blocks</option>
+              <option value="kicks">Kicks</option>
+              <option value="katas">Katas</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         TECHNIQUE CATEGORIES
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Categories</span>
+        <h2>Browse by Type</h2>
+        
+        <div class="category-grid">
+          <div class="category-card" data-category="stances">
+            <div class="category-icon">🧍</div>
+            <h3>Stances</h3>
+            <p class="muted">Foundation stances and posture</p>
+            <div class="category-count">8 techniques</div>
+          </div>
+          
+          <div class="category-card" data-category="strikes">
+            <div class="category-icon">👊</div>
+            <h3>Strikes</h3>
+            <p class="muted">Punches and hand strikes</p>
+            <div class="category-count">12 techniques</div>
+          </div>
+          
+          <div class="category-card" data-category="blocks">
+            <div class="category-icon">🛡️</div>
+            <h3>Blocks</h3>
+            <p class="muted">Defensive blocking techniques</p>
+            <div class="category-count">10 techniques</div>
+          </div>
+          
+          <div class="category-card" data-category="kicks">
+            <div class="category-icon">🦵</div>
+            <h3>Kicks</h3>
+            <p class="muted">Basic and advanced kicks</p>
+            <div class="category-count">15 techniques</div>
+          </div>
+          
+          <div class="category-card" data-category="katas">
+            <div class="category-icon">🎯</div>
+            <h3>Katas</h3>
+            <p class="muted">Forms and combinations</p>
+            <div class="category-count">6 techniques</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         TECHNIQUE LIST
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Techniques</span>
+        <h2>All Techniques</h2>
+        
+        <div class="technique-grid" id="techniqueGrid">
+          <!-- Techniques will be loaded here -->
+        </div>
+        
+        <div style="text-align: center; margin-top: 24px;">
+          <button class="btn navy square" id="loadMoreBtn">Load More Techniques</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         PRACTICE TIPS
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">💡 Training Tips</span>
+        <h2>Practice Like a Champion</h2>
+        
+        <div class="tips-grid">
+          <div class="tip-card">
+            <h3>Daily Practice</h3>
+            <p class="muted">Practice 15-20 minutes daily rather than long sessions once a week. Consistency builds muscle memory.</p>
+          </div>
+          
+          <div class="tip-card">
+            <h3>Perfect Form</h3>
+            <p class="muted">Focus on correct technique before speed. Bad habits are hard to unlearn!</p>
+          </div>
+          
+          <div class="tip-card">
+            <h3>Record Yourself</h3>
+            <p class="muted">Video your practice to see what you look like and compare with instructors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Technique Modal -->
+  <div id="techniqueModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTechniqueName">Technique Name</h2>
+        <button class="modal-close" onclick="closeTechniqueModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="technique-video">
+          <div class="video-placeholder">
+            <i class="fas fa-play-circle"></i>
+            <p>Instructional Video</p>
+          </div>
+        </div>
+        <div class="technique-details">
+          <div class="technique-info">
+            <h3>Instructions</h3>
+            <p id="modalInstructions">Step-by-step instructions will appear here.</p>
+          </div>
+          <div class="technique-tips">
+            <h3>Key Points</h3>
+            <ul id="modalKeyPoints">
+              <li>Keep your back straight</li>
+              <li>Focus on breathing</li>
+              <li>Practice slowly at first</li>
+            </ul>
+          </div>
+          <div class="technique-practice">
+            <h3>Practice Drills</h3>
+            <div id="modalDrills">
+              <div class="practice-drill">
+                <strong>Beginner:</strong> 10 repetitions, 3 sets
+              </div>
+              <div class="practice-drill">
+                <strong>Intermediate:</strong> 25 repetitions, 5 sets
+              </div>
+              <div class="practice-drill">
+                <strong>Advanced:</strong> 50 repetitions, 5 sets
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="markAsLearned()">
+          <i class="fas fa-check"></i> Mark as Learned
+        </button>
+        <button class="btn navy" onclick="addToPractice()">
+          <i class="fas fa-plus"></i> Add to Practice List
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer Partial -->
+  <div id="site-footer"></div>
+  
+  <!-- Scroll Indicator -->
+  <div id="scroll-indicator"></div>
+  
+  <!-- Return to Top -->
+  <button id="toTopBtn" aria-label="Return to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+  <!-- Partials + Base Scripts -->
+  <script src="assets/scripts/partials.js"></script>
+  <script>mountPartials();</script>
+  <script src="assets/scripts/base.js"></script>
+  <script src="assets/scripts/index.js"></script>
+  <script src="assets/scripts/technique-library.js"></script>
+</body>
+</html>

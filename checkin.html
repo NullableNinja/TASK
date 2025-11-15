@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Task Karate – Check-In System</title>
+  <meta name="description" content="Student check-in system for tracking attendance and classes."/>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/checkin.css"/>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Background -->
+  <div class="bg-geo" aria-hidden="true"></div>
+  
+  <!-- ===========================
+       MAIN CONTENT
+  ============================ -->
+  <main class="container">
+    
+    <!-- ===========================
+         HEADER
+    ============================ -->
+    <header class="checkin-header">
+      <div class="logo-section">
+        <img src="images/logo/Logo.png" alt="Task Karate Logo" class="checkin-logo"/>
+        <div class="header-text">
+          <h1>Student Check-In</h1>
+          <p class="current-time" id="currentTime"></p>
+        </div>
+      </div>
+      <div class="admin-section">
+        <button class="admin-btn" onclick="showAdminPanel()">
+          <i class="fas fa-cog"></i> Admin
+        </button>
+      </div>
+    </header>
+    
+    <!-- ===========================
+         QUICK STATS
+    ============================ -->
+    <section class="quick-stats">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <span class="stat-value" id="todayCount">0</span>
+          <span class="stat-label">Today</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-info">
+          <span class="stat-value" id="weekCount">0</span>
+          <span class="stat-label">This Week</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-info">
+          <span class="stat-value" id="monthCount">0</span>
+          <span class="stat-label">This Month</span>
+        </div>
+      </div>
+      <div class="stat-card current-class">
+        <div class="stat-icon">🥋</div>
+        <div class="stat-info">
+          <span class="stat-value" id="currentClassCount">0</span>
+          <span class="stat-label" id="currentClassType">Kids Karate</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         SEARCH SECTION
+    ============================ -->
+    <section class="search-section">
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="search" 
+               id="studentSearch" 
+               placeholder="Search student name..." 
+               autocomplete="off"
+               class="search-input">
+      </div>
+      <div class="quick-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="kids">Kids</button>
+        <button class="filter-btn" data-filter="teens">Teens</button>
+        <button class="filter-btn" data-filter="adults">Adults</button>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         STUDENT GRID
+    ============================ -->
+    <section class="students-section">
+      <div class="students-grid" id="studentsGrid">
+        <!-- Students will be loaded here -->
+      </div>
+      
+      <div class="no-results" id="noResults" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>No Students Found</h3>
+        <p>Try adjusting your search or filters</p>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         RECENT CHECK-INS
+    ============================ -->
+    <section class="recent-checkins">
+      <h3>Recent Check-Ins</h3>
+      <div class="checkins-list" id="recentCheckins">
+        <!-- Recent check-ins will be shown here -->
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- ===========================
+       ADMIN PANEL
+  ============================ -->
+  <div id="adminPanel" class="admin-panel" style="display: none;">
+    <div class="panel-content">
+      <div class="panel-header">
+        <h3>Admin Panel</h3>
+        <button class="close-btn" onclick="hideAdminPanel()">&times;</button>
+      </div>
+      
+      <div class="panel-body">
+        <div class="admin-section">
+          <h4>Current Class Settings</h4>
+          <select id="classTypeSelect" class="admin-select">
+            <option value="kids">Kids Karate</option>
+            <option value="teens">Teens & Adults</option>
+            <option value="eskrima">IS3 Eskrima</option>
+            <option value="weapons">Weapons</option>
+          </select>
+          <button class="admin-btn-primary" onclick="updateCurrentClass()">Update Class</button>
+        </div>
+        
+        <div class="admin-section">
+          <h4>Today's Summary</h4>
+          <div class="summary-stats">
+            <div class="summary-item">
+              <span>Total Check-ins:</span>
+              <strong id="summaryTotal">0</strong>
+            </div>
+            <div class="summary-item">
+              <span>Unique Students:</span>
+              <strong id="summaryUnique">0</strong>
+            </div>
+          </div>
+        </div>
+        
+        <div class="admin-section">
+          <h4>Actions</h4>
+          <button class="admin-btn-secondary" onclick="exportTodayAttendance()">
+            <i class="fas fa-download"></i> Export Today's Attendance
+          </button>
+          <button class="admin-btn-secondary" onclick="viewAttendanceReport()">
+            <i class="fas fa-chart-bar"></i> View Report
+          </button>
+          <button class="admin-btn-danger" onclick="clearTodayData()">
+            <i class="fas fa-trash"></i> Clear Today's Data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ===========================
+       SUCCESS ANIMATION
+  ============================ -->
+  <div id="checkinSuccess" class="checkin-success" style="display: none;">
+    <div class="success-content">
+      <div class="success-icon">✅</div>
+      <h2>Check-in Successful!</h2>
+      <p id="successMessage">Welcome back!</p>
+    </div>
+  </div>
+  
+  <!-- ===========================
+       SCRIPTS
+  ============================ -->
+  <script src="assets/scripts/checkin.js"></script>
+</body>
+</html>

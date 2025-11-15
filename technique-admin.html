@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Task Karate – Technique Admin</title>
+  <meta name="description" content="Manage martial arts techniques, videos, and training content."/>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
+  <link rel="stylesheet" href="assets/styles/news-admin-enhanced.css"/>
+  <link rel="stylesheet" href="assets/styles/technique-admin.css"/>
+  
+  <!-- Rich Text Editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Background -->
+  <div class="bg-geo" aria-hidden="true"></div>
+  
+  <!-- Navigation Bar Partial -->
+  <div id="site-header"></div>
+  <script>
+    fetch('partials/navigation-bar-enhanced.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-header').innerHTML = html;
+      });
+  </script>
+  
+  <!-- ===========================
+       MAIN CONTENT
+  ============================ -->
+  <main class="container">
+    
+    <!-- ===========================
+         HEADER
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-soft">
+        <span class="eyebrow">🥋 Technique Management</span>
+        <h1>Add & Edit Techniques</h1>
+        <p class="muted">
+          Manage your martial arts curriculum. Add new techniques, upload instructional videos, 
+          and organize by belt level and category.
+        </p>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         TECHNIQUE FORM
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        
+        <!-- Basic Information -->
+        <div class="technique-form-grid">
+          <div style="grid-area: name;">
+            <label for="techniqueName">Technique Name *</label>
+            <input id="techniqueName" type="text" placeholder="e.g. Front Punch" class="input-full"/>
+          </div>
+          
+          <div style="grid-area: japanese;">
+            <label for="techniqueJapanese">Japanese Name</label>
+            <input id="techniqueJapanese" type="text" placeholder="e.g. Choku Zuki" class="input-full"/>
+          </div>
+          
+          <div style="grid-area: category;">
+            <label for="techniqueCategory">Category *</label>
+            <select id="techniqueCategory" class="input-full">
+              <option value="">Select Category</option>
+              <option value="stances">Stances</option>
+              <option value="strikes">Strikes</option>
+              <option value="blocks">Blocks</option>
+              <option value="kicks">Kicks</option>
+              <option value="katas">Katas</option>
+              <option value="self-defense">Self Defense</option>
+              <option value="weapons">Weapons</option>
+            </select>
+          </div>
+          
+          <div style="grid-area: belt;">
+            <label for="techniqueBelt">Belt Level *</label>
+            <select id="techniqueBelt" class="input-full">
+              <option value="">Select Belt</option>
+              <option value="white">White Belt</option>
+              <option value="yellow">Yellow Belt</option>
+              <option value="orange">Orange Belt</option>
+              <option value="green">Green Belt</option>
+              <option value="blue">Blue Belt</option>
+              <option value="purple">Purple Belt</option>
+              <option value="brown">Brown Belt</option>
+              <option value="black">Black Belt</option>
+            </select>
+          </div>
+          
+          <div style="grid-area: difficulty;">
+            <label for="techniqueDifficulty">Difficulty</label>
+            <select id="techniqueDifficulty" class="input-full">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+          
+          <div style="grid-area: icon;">
+            <label for="techniqueIcon">Icon</label>
+            <select id="techniqueIcon" class="input-full">
+              <option value="👊">👊 Punch</option>
+              <option value="🛡️">🛡️ Block</option>
+              <option value="🦵">🦵 Kick</option>
+              <option value="🧍">🧍 Stance</option>
+              <option value="🎯">🎯 Kata</option>
+              <option value="🔪">🔪 Strike</option>
+              <option value="🔄">🔄 Roundhouse</option>
+              <option value="⚡">⚡ Speed</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Description -->
+        <div class="form-group">
+          <label for="techniqueDescription">Short Description *</label>
+          <input id="techniqueDescription" type="text" placeholder="Brief description (appears in technique cards)" class="input-full"/>
+        </div>
+        
+        <!-- Video Upload -->
+        <div class="media-upload-zone" id="videoUploadZone">
+          <h3>📹 Instructional Video</h3>
+          <p class="muted">Upload or record an instructional video for this technique</p>
+          <input type="file" id="videoInput" accept="video/*" style="display: none;"/>
+          <div class="video-preview" id="videoPreview" style="display: none;">
+            <video controls style="max-width: 100%; border-radius: 8px;"></video>
+            <button type="button" class="btn small danger" onclick="removeVideo()">Remove Video</button>
+          </div>
+        </div>
+        
+        <!-- Detailed Instructions -->
+        <div class="form-group">
+          <label>Step-by-Step Instructions *</label>
+          <div id="instructionsEditor" class="editor-enhanced" style="min-height: 200px;"></div>
+        </div>
+        
+        <!-- Key Points -->
+        <div class="form-group">
+          <label for="keyPoints">Key Teaching Points</label>
+          <div id="keyPointsList">
+            <div class="key-point-item">
+              <input type="text" placeholder="Enter key point..." class="key-point-input"/>
+              <button type="button" class="btn-small danger" onclick="removeKeyPoint(this)">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="btn small outline" onclick="addKeyPoint()">
+            <i class="fas fa-plus"></i> Add Key Point
+          </button>
+        </div>
+        
+        <!-- Practice Drills -->
+        <div class="form-group">
+          <label>Practice Requirements</label>
+          <div id="practiceDrills">
+            <div class="drill-item">
+              <input type="text" placeholder="e.g. 10 repetitions, 3 sets" class="drill-input"/>
+              <select class="drill-level">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+              <button type="button" class="btn-small danger" onclick="removeDrill(this)">Remove</button>
+            </div>
+          </div>
+          <button type="button" class="btn small outline" onclick="addDrill()">
+            <i class="fas fa-plus"></i> Add Practice Level
+          </button>
+        </div>
+        
+        <!-- Testing Requirements -->
+        <div class="form-group">
+          <label for="testingRequirements">Testing Requirements</label>
+          <textarea id="testingRequirements" rows="3" placeholder="What students need to demonstrate for belt testing..." 
+                    class="input-full" style="resize: vertical;"></textarea>
+        </div>
+        
+        <!-- Common Mistakes -->
+        <div class="form-group">
+          <label for="commonMistakes">Common Mistakes to Avoid</label>
+          <textarea id="commonMistakes" rows="3" placeholder="List common errors and how to correct them..." 
+                    class="input-full" style="resize: vertical;"></textarea>
+        </div>
+        
+        <!-- Save/Update Buttons -->
+        <div class="form-actions">
+          <button type="button" class="save-draft-btn" onclick="saveTechniqueDraft()">
+            <i class="fas fa-save"></i> Save Draft
+          </button>
+          <button type="button" class="btn navy" onclick="saveTechnique()">
+            <i class="fas fa-check"></i> Save Technique
+          </button>
+          <button type="button" class="btn" onclick="resetForm()">
+            <i class="fas fa-times"></i> Clear Form
+          </button>
+        </div>
+        
+      </div>
+    </section>
+    
+    <!-- ===========================
+         EXISTING TECHNIQUES
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">📚 Current Techniques</span>
+        <h2>Manage Existing Techniques</h2>
+        
+        <div class="technique-filters">
+          <input type="search" id="techniqueSearch" placeholder="Search techniques..."/>
+          <select id="filterBelt">
+            <option value="">All Belts</option>
+            <option value="white">White</option>
+            <option value="yellow">Yellow</option>
+            <option value="orange">Orange</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="purple">Purple</option>
+            <option value="brown">Brown</option>
+            <option value="black">Black</option>
+          </select>
+          <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option value="stances">Stances</option>
+            <option value="strikes">Strikes</option>
+            <option value="blocks">Blocks</option>
+            <option value="kicks">Kicks</option>
+            <option value="katas">Katas</option>
+          </select>
+        </div>
+        
+        <div class="technique-management-grid" id="techniqueGrid">
+          <!-- Techniques will be loaded here -->
+        </div>
+        
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer Partial -->
+  <div id="site-footer"></div>
+  
+  <!-- Rich Text Editor Scripts -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+  <!-- Partials + Base Scripts -->
+  <script src="assets/scripts/partials.js"></script>
+  <script>mountPartials();</script>
+  <script src="assets/scripts/base.js"></script>
+  <script src="assets/scripts/technique-admin.js"></script>
+</body>
+</html>

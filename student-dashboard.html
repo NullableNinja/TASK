@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Task Karate – Student Dashboard</title>
+  <meta name="description" content="Track your martial arts journey, view progress, and celebrate achievements."/>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo/Logo.png"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/styles/base.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/navigation-bar.css"/>
+  <link rel="stylesheet" href="assets/styles/partials/footer.css"/>
+  
+  <!-- Dashboard Styles -->
+  <link rel="stylesheet" href="assets/styles/gamification.css"/>
+  <link rel="stylesheet" href="assets/styles/student-dashboard.css"/>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Background -->
+  <div class="bg-geo" aria-hidden="true"></div>
+  
+  <!-- Navigation Bar Partial -->
+  <div id="site-header"></div>
+  <script>
+    // Load enhanced navigation for student pages
+    fetch('partials/navigation-bar-enhanced.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-header').innerHTML = html;
+      });
+  </script>
+  
+  <!-- ===========================
+       MAIN CONTENT
+  ============================ -->
+  <main class="container">
+    
+    <!-- ===========================
+         WELCOME HEADER
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-soft">
+        <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div class="student-avatar">
+            <img src="images/staff/RandyThomson.png" alt="Student Avatar" id="studentAvatar"/>
+            <div class="avatar-badge" id="currentBeltBadge">
+              <span>Orange Belt</span>
+            </div>
+          </div>
+          <div style="flex: 1;">
+            <span class="eyebrow">Welcome Back!</span>
+            <h1 id="studentName">Alex Johnson</h1>
+            <p class="muted">
+              <i class="fas fa-calendar-check"></i> 
+              Training for <span id="trainingDuration">18 months</span> • 
+              <i class="fas fa-fire"></i> 
+              <span id="currentStreak">12 day</span> streak
+            </p>
+          </div>
+          <div class="quick-actions">
+            <button class="btn navy square" onclick="markAttendance()">
+              <i class="fas fa-check-circle"></i> Mark Today's Class
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         MILESTONE CELEBRATION (if any)
+    ============================ -->
+    <section id="milestoneSection" class="stack-soft" style="display: none;">
+      <div class="milestone-celebration">
+        <h2 class="milestone-title" id="milestoneTitle">🎉 Congratulations!</h2>
+        <p class="milestone-message" id="milestoneMessage">You've reached a new milestone!</p>
+        <a href="#" class="milestone-action" id="milestoneAction">View Achievement</a>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         PROGRESS STATS
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Your Progress</span>
+        <h2>Training Statistics</h2>
+        
+        <div class="stats-grid">
+          <div class="stat-card highlight">
+            <span class="stat-value" id="classesAttended">47</span>
+            <span class="stat-label">Classes Attended</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="practiceHours">124</span>
+            <span class="stat-label">Practice Hours</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="techniquesLearned">28</span>
+            <span class="stat-label">Techniques Learned</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="tournamentsWon">3</span>
+            <span class="stat-label">Tournaments Won</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         BELT PROGRESSION
+    ============================ -->
+    <section class="stack-soft">
+      <div class="belt-progression">
+        <span class="eyebrow">Your Journey</span>
+        <h2>Belt Progression</h2>
+        <p class="muted">Track your path from white belt to black belt and beyond!</p>
+        
+        <div class="belt-path">
+          <div class="belt-step">
+            <div class="belt-achievement belt-white earned" title="White Belt - Completed"></div>
+            <div class="belt-label">White</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-yellow earned" title="Yellow Belt - Completed"></div>
+            <div class="belt-label">Yellow</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-orange current" title="Orange Belt - Current"></div>
+            <div class="belt-label">Orange</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-green" title="Green Belt - 5 classes to go"></div>
+            <div class="belt-label">Green</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-blue" title="Blue Belt - Not started"></div>
+            <div class="belt-label">Blue</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-purple" title="Purple Belt - Not started"></div>
+            <div class="belt-label">Purple</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-brown" title="Brown Belt - Not started"></div>
+            <div class="belt-label">Brown</div>
+          </div>
+          <div class="belt-step">
+            <div class="belt-achievement belt-black" title="Black Belt - Ultimate Goal"></div>
+            <div class="belt-label">Black</div>
+          </div>
+        </div>
+        
+        <div class="next-belt-info">
+          <h3>Next: Green Belt</h3>
+          <p class="muted">5 more classes until testing eligibility</p>
+          <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 8px;">
+            <div style="width: 60%; height: 100%; background: linear-gradient(90deg, var(--task-400), var(--task-500));"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         ACHIEVEMENT BADGES
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Accomplishments</span>
+        <h2>Achievement Badges</h2>
+        <p class="muted">Earn badges for milestones and special achievements!</p>
+        
+        <div class="achievement-grid">
+          <div class="achievement-badge" title="First Class Complete">
+            <span class="badge-icon">🥋</span>
+            <div class="badge-title">First Steps</div>
+            <div class="badge-description">Attended your first class</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+          
+          <div class="achievement-badge" title="10 Class Milestone">
+            <span class="badge-icon">⭐</span>
+            <div class="badge-title">Dedicated Student</div>
+            <div class="badge-description">Completed 10 classes</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+          
+          <div class="achievement-badge" title="Perfect Month">
+            <span class="badge-icon">📅</span>
+            <div class="badge-title">Perfect Attendance</div>
+            <div class="badge-description">No absences this month</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 85%;"></div>
+            </div>
+          </div>
+          
+          <div class="achievement-badge" title="Technique Master">
+            <span class="badge-icon">🥊</span>
+            <div class="badge-title">Technique Master</div>
+            <div class="badge-description">Learned 25 techniques</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+          
+          <div class="achievement-badge locked" title="Tournament Champion - 1 more win">
+            <span class="badge-icon">🏆</span>
+            <div class="badge-title">Tournament Champion</div>
+            <div class="badge-description">Win 5 tournaments</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+          
+          <div class="achievement-badge locked" title="Black Belt Goal">
+            <span class="badge-icon">🎯</span>
+            <div class="badge-title">Black Belt Journey</div>
+            <div class="badge-description">Reach black belt level</div>
+            <div class="badge-progress">
+              <div class="badge-progress-bar" style="width: 35%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         ATTENDANCE TRACKER
+    ============================ -->
+    <section class="stack-soft">
+      <div class="attendance-tracker">
+        <span class="eyebrow">Attendance</span>
+        <h2>This Month's Training</h2>
+        
+        <div class="attendance-calendar" id="attendanceCalendar">
+          <!-- Calendar will be generated by JavaScript -->
+        </div>
+        
+        <div class="streak-counter">
+          <span class="streak-fire">🔥</span>
+          <span>Current Streak: <strong id="streakCount">12 days</strong></span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ===========================
+         TECHNIQUE LIBRARY PREVIEW
+    ============================ -->
+    <section class="stack-soft">
+      <div class="card layered-off">
+        <span class="eyebrow">Learning</span>
+        <h2>Recent Techniques</h2>
+        <p class="muted">Practice these techniques at home to improve your skills!</p>
+        
+        <div class="technique-list" id="recentTechniques">
+          <div class="technique-item">
+            <div class="technique-icon">👊</div>
+            <div class="technique-info">
+              <h4>Front Punch (Choku Zuki)</h4>
+              <p class="muted">Basic straight punch - practice 50 reps daily</p>
+            </div>
+            <div class="technique-status learned">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          
+          <div class="technique-item">
+            <div class="technique-icon">🛡️</div>
+            <div class="technique-info">
+              <h4>Low Block (Gedan Barai)</h4>
+              <p class="muted">Downward block - practice with partner</p>
+            </div>
+            <div class="technique-status in-progress">
+              <i class="fas fa-spinner"></i>
+            </div>
+          </div>
+          
+          <div class="technique-item">
+            <div class="technique-icon">🦵</div>
+            <div class="technique-info">
+              <h4>Front Kick (Mae Geri)</h4>
+              <p class="muted">Basic front kick - focus on chamber and recoil</p>
+            </div>
+            <div class="technique-status locked">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="#" class="btn navy square">View Full Technique Library</a>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer Partial -->
+  <div id="site-footer"></div>
+  
+  <!-- Scroll Indicator -->
+  <div id="scroll-indicator"></div>
+  
+  <!-- Return to Top -->
+  <button id="toTopBtn" aria-label="Return to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+  <!-- Partials + Base Scripts -->
+  <script src="assets/scripts/partials.js"></script>
+  <script>mountPartials();</script>
+  <script src="assets/scripts/base.js"></script>
+  <script src="assets/scripts/index.js"></script>
+  <script src="assets/scripts/partials/navigation-bar.js"></script>
+  
+  <!-- Dashboard Scripts -->
+  <script src="assets/scripts/student-dashboard.js"></script>
+</body>
+</html>

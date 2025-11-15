@@ -1,0 +1,432 @@
+/* ===========================
+   MODERN NAVIGATION BAR - Paper-Fu Style
+   ---------------------------
+   - Enhanced with custom SVG icons
+   - Improved Paper-Fu aesthetic
+   - Smooth animations and transitions
+   - Mobile-first responsive design
+   =========================== */
+
+.navbar {
+  /* Keep nav bar visible at top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  /* Flexbox layout for logo + links */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Spacing inside bar */
+  padding: 12px 24px;
+
+  /* Ensure it stays above page content */
+  z-index: 1000;
+
+  /* Enhanced glass-like background with TASK blue tint */
+  background: linear-gradient(
+    180deg,
+    rgba(31, 94, 161, 0.15) 0%,
+    rgba(14, 26, 35, 0.85) 100%
+  );
+  backdrop-filter: blur(16px) saturate(140%);
+
+  /* Modern border with gradient */
+  border-bottom: 1px solid rgba(31, 94, 161, 0.3);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Smooth transitions */
+  transition: all 0.3s ease;
+}
+
+/* Scrolled state - more opaque */
+.navbar.scrolled {
+  background: linear-gradient(
+    180deg,
+    rgba(31, 94, 161, 0.25) 0%,
+    rgba(14, 26, 35, 0.95) 100%
+  );
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ===========================
+   BRAND / LOGO
+   =========================== */
+.navbar .nav-brand {
+  position: relative;
+  z-index: 1100;
+}
+
+.navbar .nav-brand img.logo {
+  height: 85px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.navbar .nav-brand:hover img.logo {
+  transform: scale(1.05) rotate(-2deg);
+  filter: drop-shadow(0 6px 12px rgba(31, 94, 161, 0.6));
+}
+
+/* ===========================
+   NAV LINKS (UL container)
+   =========================== */
+.navbar .nav-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* ===========================
+   NAV LINKS (individual <a>)
+   =========================== */
+.navbar .nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+
+  /* Paper-Fu rounded style */
+  border-radius: 14px;
+
+  /* Typography - HI-YAH bold */
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: 0.02em;
+
+  /* Paper-Fu layered background */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* Paper-Fu shadow layers */
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Smooth transitions */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* SVG icon styling */
+.navbar .nav-links a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: transform 0.25s ease;
+}
+
+/* Hover effect - Paper-Fu lift with TASK blue glow */
+.navbar .nav-links a:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 94, 161, 0.4) 0%,
+    rgba(23, 62, 104, 0.3) 100%
+  );
+  border-color: rgba(31, 94, 161, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(31, 94, 161, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.navbar .nav-links a:hover svg {
+  transform: scale(1.1);
+}
+
+/* Active state */
+.navbar .nav-links a.active {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 94, 161, 0.5) 0%,
+    rgba(23, 62, 104, 0.4) 100%
+  );
+  border-color: rgba(31, 94, 161, 0.6);
+  box-shadow: 
+    0 2px 8px rgba(31, 94, 161, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Karate strike underline effect */
+.navbar .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--task-400), transparent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar .nav-links a:hover::after {
+  width: 80%;
+}
+
+/* ===========================
+   DROPDOWN MENU
+   =========================== */
+.navbar .dropdown {
+  position: relative;
+}
+
+.navbar .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  
+  /* Paper-Fu layered panel */
+  background: linear-gradient(
+    180deg,
+    rgba(31, 94, 161, 0.15) 0%,
+    rgba(14, 26, 35, 0.95) 100%
+  );
+  backdrop-filter: blur(16px) saturate(140%);
+  
+  border-radius: 12px;
+  border: 1px solid rgba(31, 94, 161, 0.3);
+  
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  
+  /* Paper-Fu shadow layers */
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  min-width: 200px;
+  z-index: 1001;
+  
+  /* Animation */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.navbar .dropdown-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin: 2px 0;
+  
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  
+  transition: all 0.2s ease;
+}
+
+.navbar .dropdown-menu a:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 94, 161, 0.4) 0%,
+    rgba(23, 62, 104, 0.3) 100%
+  );
+  border-color: rgba(31, 94, 161, 0.4);
+  transform: translateX(4px);
+  box-shadow: 
+    0 2px 8px rgba(31, 94, 161, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown arrow indicator */
+.navbar .dropdown > a::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 6px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 0.25s ease;
+}
+
+.navbar .dropdown:hover > a::before {
+  transform: rotate(180deg);
+}
+
+/* ===========================
+   HAMBURGER MENU (Mobile)
+   =========================== */
+.navbar .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+  z-index: 1101;
+}
+
+.navbar .hamburger:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 94, 161, 0.3) 0%,
+    rgba(23, 62, 104, 0.2) 100%
+  );
+  transform: scale(1.05);
+}
+
+.navbar .hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.navbar .hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.navbar .hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar .hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===========================
+   MOBILE NAVIGATION
+   =========================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 16px;
+    height: auto;
+  }
+
+  .navbar .nav-brand img.logo {
+    height: 60px;
+  }
+
+  /* Show hamburger on mobile */
+  .navbar .hamburger {
+    display: flex;
+  }
+
+  /* Hide nav links by default */
+  .navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 4px;
+    
+    background: linear-gradient(
+      180deg,
+      rgba(31, 94, 161, 0.2) 0%,
+      rgba(14, 26, 35, 0.98) 100%
+    );
+    backdrop-filter: blur(16px) saturate(140%);
+    
+    padding: 16px;
+    border-radius: 0 0 16px 16px;
+    border: 1px solid rgba(31, 94, 161, 0.3);
+    border-top: none;
+    
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    z-index: 1000;
+  }
+
+  /* Show when toggled */
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  /* Full width links on mobile */
+  .navbar .nav-links a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Dropdown adjustments for mobile */
+  .navbar .dropdown-menu {
+    position: static;
+    display: none;
+    margin: 4px 0;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar .dropdown.active .dropdown-menu {
+    display: block;
+  }
+
+  .navbar .dropdown > a::before {
+    margin-left: auto;
+  }
+}
+
+/* ===========================
+   TABLET ADJUSTMENTS
+   =========================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar .nav-links {
+    gap: 6px;
+  }
+
+  .navbar .nav-links a {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
